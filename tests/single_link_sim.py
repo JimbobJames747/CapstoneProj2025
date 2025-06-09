@@ -231,7 +231,6 @@ if __name__=="__main__":
     max_tau_centers, max_g2, acc_sub_tau_centers, acc_sub_g2 = run_single_link(starting_seed, iteration_number=1, delta_t=delta_t)
     
     plt.plot(max_tau_centers * 1e9, max_g2, label='max')
-    #plt.plot(min_tau_centers * 1e9, min_g2, label='min')
     plt.plot(acc_sub_tau_centers * 1e9, acc_sub_g2, label='acc_subtr')
     plt.axvline(x=-delta_t, color='red', linestyle='--', linewidth=1.5)  
     plt.axvline(x=delta_t, color='red', linestyle='--', linewidth=1.5)  
