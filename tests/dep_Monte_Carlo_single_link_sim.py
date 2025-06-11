@@ -68,10 +68,15 @@ def run_single_link(seed, iteration_number, delta_t):
         # assume links A-Source Source-B are identical
         R_rep = 50e6              # Source repetition rate [Hz]
         mu = .01                 # Mean photon pairs per pulse
+        #prob_one = .9 
+        #prob_two = .01
+        #prob_zero = 1 - (prob_one + prob_two)
+        source_fidelity = 1
+        print("source fidelity:", source_fidelity)
 
         length = 10 # [km]
         midpoint_length = length / 2
-        fibre_atten = -0.18        
+        fibre_atten = -0.18 # [dB/ km]        
         fibre_effeciency = 10**((fibre_atten*midpoint_length) / 10)
         n_fibre = 1.46 # assumed from Thor
 
@@ -106,10 +111,14 @@ def run_single_link(seed, iteration_number, delta_t):
             det_B = False
             t_A = None 
             t_B = None
+            entangled_state = False
             # generate random amount of random pairs
             num_pairs = np.random.poisson(mu) # [Takesue] eq 23
             pairs_generated.append(num_pairs)
             for _ in range(num_pairs):
+                # simulate if photons are entangled or noisy --> yields mixed state
+                if np.random.rand() < source_fidelity:
+                    entangled_state = True
                 # simulate if photon is detected
                 if np.random.rand() < total_effeciency:
                     t_A = pulse_time + transmission_delay + np.random.normal(0, jitter) # ToDO: confirm jitter is Gaussian
@@ -118,12 +127,18 @@ def run_single_link(seed, iteration_number, delta_t):
                     t_B = pulse_time + transmission_delay + np.random.normal(0, jitter)
                     det_B = True
                 if det_A and det_B:
-                    coinc_and_singles_A.append((t_A, True))
-                    coinc_and_singles_B.append((t_B, True))
+                    if entangled_state:
+                        coinc_and_singles_A.append((t_A, True))
+                        coinc_and_singles_B.append((t_B, True))
+                    else:
+                        coinc_and_singles_A.append((t_A, False))
+                        coinc_and_singles_B.append((t_B, False))
+                # single counts
                 elif det_A and not det_B:
                     coinc_and_singles_A.append((t_A, False))
                 elif det_B and not det_A:
                     coinc_and_singles_B.append((t_B, False))
+        
         print("average Pairs generated per pulse", np.mean(pairs_generated))
         print("Single and CC Detections A:", len(coinc_and_singles_A))
         print("Single and CC Detections B", len(coinc_and_singles_B))
@@ -231,6 +246,7 @@ if __name__=="__main__":
     max_tau_centers, max_g2, acc_sub_tau_centers, acc_sub_g2 = run_single_link(starting_seed, iteration_number=1, delta_t=delta_t)
     
     plt.plot(max_tau_centers * 1e9, max_g2, label='max')
+    #plt.plot(min_tau_centers * 1e9, min_g2, label='min')
     plt.plot(acc_sub_tau_centers * 1e9, acc_sub_g2, label='acc_subtr')
     plt.axvline(x=-delta_t, color='red', linestyle='--', linewidth=1.5)  
     plt.axvline(x=delta_t, color='red', linestyle='--', linewidth=1.5)  
