@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1920</width>
-    <height>1080</height>
+    <width>960</width>
+    <height>540</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -21,6 +21,11 @@
     <width>400</width>
     <height>300</height>
    </size>
+  </property>
+  <property name="font">
+   <font>
+    <family>Neue Haas Grotesk Text Pro Ligh</family>
+   </font>
   </property>
   <property name="windowTitle">
    <string>Simulaysh</string>
@@ -85,8 +90,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1920</width>
-     <height>26</height>
+     <width>960</width>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
