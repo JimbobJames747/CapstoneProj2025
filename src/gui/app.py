@@ -3,7 +3,7 @@ import sys
 from PySide6 import QtCore, QtGui, QtWidgets
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtCore import QFile
-from logic import LogicHandler
+from .logic import LogicHandler
 
 
 
