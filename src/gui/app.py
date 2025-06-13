@@ -21,6 +21,9 @@ class MainApp:
 
         self.logic = LogicHandler()
         self.window.pushButton.clicked.connect(self.logic.start_simulation)
+        
+        # menu bar file-->exit
+        self.window.actionExit.triggered.connect(self.logic.exit_app)
 
 
     def run(self):
