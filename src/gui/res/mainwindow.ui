@@ -58,7 +58,7 @@ QStatusBar {
   <widget class="QWidget" name="centralwidget">
    <property name="styleSheet">
     <string notr="true">QWidget {
-	background-color: &quot;#f0ffe4&quot;
+	background-color: rgb(240, 255, 228)
 }</string>
    </property>
    <layout class="QGridLayout" name="gridLayout">
@@ -82,12 +82,25 @@ QStatusBar {
           </property>
           <property name="styleSheet">
            <string notr="true">QWidget#paramSelect {
-	border: 2px solid black
+	border: 2px solid black;
+	background-color: #f0ffe4
+}
+QWidget {
+	background-color: &quot;#f0ffe4&quot;
 }</string>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_4">
            <item>
             <widget class="QLabel" name="label">
+             <property name="font">
+              <font>
+               <family>Verdana</family>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
              <property name="text">
               <string>Component params</string>
              </property>
@@ -98,21 +111,37 @@ QStatusBar {
              <property name="font">
               <font>
                <family>Verdana</family>
+               <pointsize>10</pointsize>
               </font>
              </property>
              <property name="styleSheet">
               <string notr="true">QTreeWidget {
-	color: black
+	color: white;
+	border: 2px solid black;
+	background-color: rgb(36, 88, 104)
 }</string>
              </property>
              <column>
               <property name="text">
-               <string>1</string>
+               <string>Network</string>
+              </property>
+              <property name="font">
+               <font>
+                <family>Verdana</family>
+                <pointsize>12</pointsize>
+               </font>
+              </property>
+              <property name="background">
+               <color>
+                <red>36</red>
+                <green>88</green>
+                <blue>104</blue>
+               </color>
               </property>
              </column>
              <item>
               <property name="text">
-               <string>testr</string>
+               <string>test</string>
               </property>
               <item>
                <property name="text">
@@ -149,6 +178,12 @@ QStatusBar {
            </item>
            <item>
             <widget class="QLabel" name="label_5">
+             <property name="font">
+              <font>
+               <family>Verdana</family>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
              <property name="text">
               <string>(Selected component)</string>
              </property>
@@ -158,7 +193,11 @@ QStatusBar {
             <widget class="QTableWidget" name="tableWidget">
              <property name="styleSheet">
               <string notr="true">QTableWidget {
-	color: black
+	color: black;
+	background-color: rgb(36, 88, 104)
+}
+QWidget#tableWidget {
+	border: 2px solid black
 }</string>
              </property>
              <column>
@@ -214,28 +253,47 @@ QStatusBar {
           </property>
           <property name="styleSheet">
            <string notr="true">QWidget#resultsArea {
-	border: 2px solid black
+	border: 2px solid black;
+	background-color: &quot;#f0ffe4&quot;
 }</string>
           </property>
-          <widget class="QLabel" name="label_3">
-           <property name="geometry">
-            <rect>
-             <x>140</x>
-             <y>40</y>
-             <width>71</width>
-             <height>31</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Results area</string>
-           </property>
-          </widget>
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <item>
+            <widget class="QTabWidget" name="tabWidget_2">
+             <property name="styleSheet">
+              <string notr="true">QWidget {
+	background-color: rgb(36, 88, 104);
+	color: white
+}</string>
+             </property>
+             <property name="currentIndex">
+              <number>1</number>
+             </property>
+             <widget class="QWidget" name="tab_3">
+              <attribute name="title">
+               <string>Tab 1</string>
+              </attribute>
+             </widget>
+             <widget class="QWidget" name="tab_4">
+              <attribute name="title">
+               <string>Tab 2</string>
+              </attribute>
+             </widget>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
        </layout>
       </item>
       <item>
        <widget class="QWidget" name="componentSelect" native="true">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>200</height>
+         </size>
+        </property>
         <property name="maximumSize">
          <size>
           <width>16777215</width>
@@ -244,38 +302,38 @@ QStatusBar {
         </property>
         <property name="styleSheet">
          <string notr="true">QWidget#componentSelect {
-	border: 2px solid black
+	border: 2px solid black;
+	background-color: &quot;#f0ffe4&quot;
 }</string>
         </property>
         <layout class="QGridLayout" name="gridLayout_3">
-         <item row="1" column="0">
-          <widget class="QScrollArea" name="scrollArea">
-           <property name="maximumSize">
+         <item row="0" column="0">
+          <widget class="QTabWidget" name="tabWidget">
+           <property name="minimumSize">
             <size>
-             <width>16777215</width>
-             <height>16777215</height>
+             <width>0</width>
+             <height>160</height>
             </size>
            </property>
-           <property name="widgetResizable">
-            <bool>true</bool>
+           <property name="styleSheet">
+            <string notr="true">QWidget {
+	background-color: rgb(36, 88, 104);
+	color: white
+}</string>
            </property>
-           <widget class="QWidget" name="scrollAreaWidgetContents">
-            <property name="geometry">
-             <rect>
-              <x>0</x>
-              <y>0</y>
-              <width>1880</width>
-              <height>158</height>
-             </rect>
-            </property>
+           <property name="currentIndex">
+            <number>0</number>
+           </property>
+           <widget class="QWidget" name="tab">
+            <attribute name="title">
+             <string>Tab 1</string>
+            </attribute>
            </widget>
-          </widget>
-         </item>
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_4">
-           <property name="text">
-            <string>Component selection</string>
-           </property>
+           <widget class="QWidget" name="tab_2">
+            <attribute name="title">
+             <string>Tab 2</string>
+            </attribute>
+           </widget>
           </widget>
          </item>
         </layout>
@@ -295,7 +353,7 @@ QStatusBar {
        <number>0</number>
       </property>
       <item>
-       <widget class="QWidget" name="widget_4" native="true">
+       <widget class="QWidget" name="toolBar" native="true">
         <property name="maximumSize">
          <size>
           <width>16777215</width>
@@ -304,12 +362,12 @@ QStatusBar {
         </property>
         <property name="styleSheet">
          <string notr="true">.QPushButton {
-	background-color: &quot;#ffffff&quot;;
+	background-color: rgb(255, 255, 255);
 	border-color: &quot;#000000&quot;;
 	color: &quot;#000000&quot;
 }
 QWidget{
-	background-color: rgb(144, 144, 144);
+	background-color: rgb(36, 88, 104)
 }</string>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -342,7 +400,7 @@ QWidget{
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_2">
+          <widget class="QPushButton" name="saveBtn">
            <property name="minimumSize">
             <size>
              <width>50</width>
@@ -364,6 +422,38 @@ QWidget{
           </widget>
          </item>
          <item>
+          <widget class="QPushButton" name="runBtn">
+           <property name="maximumSize">
+            <size>
+             <width>50</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Run</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="stopBtn">
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>50</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Stop</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <spacer name="horizontalSpacer">
            <property name="orientation">
             <enum>Qt::Orientation::Horizontal</enum>
@@ -375,6 +465,22 @@ QWidget{
             </size>
            </property>
           </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="exitBtn">
+           <property name="maximumSize">
+            <size>
+             <width>50</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="text">
+            <string>Exit</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>
