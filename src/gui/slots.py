@@ -1,6 +1,6 @@
 import sys
 
-class LogicHandler:
+class SlotHandler:
     def __init__(self, ui):
         self.ui = ui
 

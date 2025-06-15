@@ -3,7 +3,7 @@ import sys
 from PySide6 import QtCore, QtGui, QtWidgets
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtCore import QFile
-from .logic import LogicHandler
+from .slots import SlotHandler
 
 
 
@@ -20,11 +20,10 @@ class MainApp:
         self.window = loader.load(ui_file_path, None)
 
 
-        self.logic = LogicHandler(self.window)
-        self.window.pushButton.clicked.connect(self.logic.start_simulation)
-
+        self.logic = SlotHandler(self.window)
+        #self.window.pushButton.clicked.connect(self.logic.start_simulation)
         
-        self.window.pushButton.clicked.connect(lambda: self.logic.change_label("test"))
+        #self.window.pushButton.clicked.connect(lambda: self.logic.change_label("test"))
         
         # menu bar file-->exit
         self.window.actionExit.triggered.connect(self.logic.exit_app)
