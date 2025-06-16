@@ -21,7 +21,6 @@ class MainApp:
 
 
         self.logic = SlotHandler(self.window)
-        #self.window.pushButton.clicked.connect(self.logic.start_simulation)
         
         #self.window.pushButton.clicked.connect(lambda: self.logic.change_label("test"))
         
