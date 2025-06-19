@@ -53,7 +53,7 @@ QStatusBar {
 </string>
   </property>
   <property name="tabShape">
-   <enum>QTabWidget::TabShape::Rounded</enum>
+   <enum>QTabWidget::Rounded</enum>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="styleSheet">
@@ -63,7 +63,7 @@ QStatusBar {
    </property>
    <layout class="QGridLayout" name="gridLayout">
     <property name="sizeConstraint">
-     <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
+     <enum>QLayout::SetDefaultConstraint</enum>
     </property>
     <item row="1" column="0">
      <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -226,10 +226,7 @@ QWidget#tableWidget {
 }</string>
           </property>
           <property name="frameShape">
-           <enum>QFrame::Shape::StyledPanel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Shadow::Raised</enum>
+           <enum>QFrame::NoFrame</enum>
           </property>
           <layout class="QGridLayout" name="gridLayout_2">
            <item row="2" column="0">
@@ -282,7 +279,7 @@ QWidget#tableWidget {
 }</string>
              </property>
              <property name="tabShape">
-              <enum>QTabWidget::TabShape::Rounded</enum>
+              <enum>QTabWidget::Rounded</enum>
              </property>
              <property name="currentIndex">
               <number>1</number>
@@ -349,7 +346,7 @@ QWidget#tableWidget {
 }</string>
            </property>
            <property name="tabShape">
-            <enum>QTabWidget::TabShape::Rounded</enum>
+            <enum>QTabWidget::Rounded</enum>
            </property>
            <property name="currentIndex">
             <number>0</number>
@@ -421,7 +418,7 @@ QWidget#tableWidget {
        <number>6</number>
       </property>
       <property name="sizeConstraint">
-       <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
+       <enum>QLayout::SetDefaultConstraint</enum>
       </property>
       <property name="bottomMargin">
        <number>0</number>
@@ -535,9 +532,6 @@ QWidget{
          </item>
          <item>
           <spacer name="horizontalSpacer">
-           <property name="orientation">
-            <enum>Qt::Orientation::Horizontal</enum>
-           </property>
            <property name="sizeHint" stdset="0">
             <size>
              <width>40</width>
@@ -581,6 +575,7 @@ QWidget{
    <property name="font">
     <font>
      <family>Segoe UI</family>
+     <weight>50</weight>
      <bold>false</bold>
     </font>
    </property>
@@ -627,7 +622,8 @@ QWidget{
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset theme="QIcon::ThemeIcon::DocumentNew"/>
+    <iconset theme="QIcon::ThemeIcon::DocumentNew">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>New</string>
@@ -635,7 +631,8 @@ QWidget{
   </action>
   <action name="actionSave">
    <property name="icon">
-    <iconset theme="QIcon::ThemeIcon::DocumentSave"/>
+    <iconset theme="QIcon::ThemeIcon::DocumentSave">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Save</string>
