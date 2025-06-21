@@ -13,5 +13,7 @@ Todo:
 -consider converting .ui to .py (seems to be most common practice)
 -for component classes: Lower level component class define parameters and what is conmnected to,
 higher level gui class that inherits component and does gui manipulation
+-create network class that holds all components and does the logic of the network
+-change fibre to not inherit component?
 
 """
