@@ -5,8 +5,9 @@ class Detector(Component):
     can_output = False
 
     def __init__(self, name="Detector", x = 0, y = 0, 
-                 det_efficiency = 0, p_dark_count = 0):
-        super().__init__(name=name, x=x, y=y)
+                 det_efficiency = 0, p_dark_count = 0,
+                 network=None):
+        super().__init__(name=name, x=x, y=y, network=network, link=False)
         self.det_efficiency = det_efficiency
         self.p_dark_count = p_dark_count
 

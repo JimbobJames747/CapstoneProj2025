@@ -1,22 +1,28 @@
 from component import Component
+from network import Network
 
-class Fibre(Component):
+class Fibre():
     can_input = True
     can_output = True
 
-    def __init__(self, x=0, y=0, fibre_length=0.0, attenuation=0.0, name="Fibre"):
-        super().__init__(name=name, x=x, y=y)
+    def __init__(self, network: Network, start: Component, end: Component, fibre_length=0.0, attenuation=0.0, name="Fibre"):
         self.fibre_length = fibre_length  # in kilometers
         self.attenuation = attenuation  # in dB/km
+        self.name = name
+        self.network = network
+        self.start = start
+        self.end = end
+        self.connections = [start, end]
+        start.connectOutput(self)
+        end.connectInput(self)
+        network.add_link(self)
 
     def __str__(self):
         return (
             f"{self.name} with length: {self.fibre_length:.2f} km, "
             f"attenuation: {self.attenuation:.2f} dB/km, "
-            f"x: {self.x:.3f}, "
-            f"y: {self.y:.3f}, "
-            f"inputs: {', '.join(input.name for input in self.inputs)}, "
-            f"outputs: {', '.join(output.name for output in self.outputs)}"
+            f"start: ({self.start.name}), "
+            f"end: ({self.end.name})"
         )
     
 

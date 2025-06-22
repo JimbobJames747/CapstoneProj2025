@@ -1,31 +1,41 @@
 
 # base class for all components
 # params are x and y coords in drawing area.
+
 class Component():
-    def __init__(self, name, x, y):
+
+
+    def __init__(self, name, x, y, network, link=False):
         self.x = x
         self.y = y
         self.name = name
         self.outputs = []
         self.inputs = []
+        self.network = network
+        network.add_component(self)
 
-
-    def connectInput(self, component):
+    def connectInput(self, link):
         if self.can_input:
-            if component in self.inputs:
-                raise ValueError(f"Component {self.name} already has input from {component.name}.")
+            if link.end in self.inputs:
+                raise ValueError(f"Component {self.name} already has input from {link.end.name}.")
+            elif link.end not in self.network.components :
+                raise ValueError(f"Components not in the same network: {self.name} and {link.end.name}.")
             else:
-                self.inputs.append(component)
-                component.outputs.append(self)
+                self.inputs.append(link)
+                link.connections.append(self)
         else:
             raise ValueError(f"Component {self.name} cannot take an input.")
-        
-        
-    def connectOutput(self, component):
+
+    def connectOutput(self, link):
         if self.can_output:
-            if component in self.outputs:
-                raise ValueError(f"Component {self.name} already connected as output to {component.name}.")
-            self.outputs.append(component)
-            component.inputs.append(self)
+            if link.start in self.outputs:
+                raise ValueError(f"Component {self.name} already connected as output to {link.start.name}.")
+            elif link.start not in self.network.components :
+                raise ValueError(f"Components not in the same network: {self.name} and {link.start.name}.")
+            else:
+                self.outputs.append(link)
+                link.connections.append(self)
         else:
             raise ValueError(f"Component {self.name} cannot output to another component.")
+        
+    
