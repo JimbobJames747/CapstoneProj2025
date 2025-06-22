@@ -28,17 +28,22 @@ class Source(Component):
 network = Network(name="Test Network")
 
 detector_1 = Detector(name="Detector_1", x=30, y=50, det_efficiency=0.9, p_dark_count=0.01, network=network)
-source = Source(repetition_rate=1000, x=10, y=20, name="Test Source", network=network)
 detector_2 = Detector(name="Detector_2", x=30, y=40, det_efficiency=0.9, p_dark_count=0.01, network=network)
+detector_3 = Detector(name="Detector_3", x=30, y=30, det_efficiency=0.9, p_dark_count=0.01, network=network)
+detector_4 = Detector(name="Detector_4", x=30, y=20, det_efficiency=0.9, p_dark_count=0.01, network=network)
 
-fibre = Fibre(fibre_length=10.0, attenuation=0.2, name="Fibre_1", network=network, start=source, end=detector_1)
-fibre = Fibre(fibre_length=10.0, attenuation=0.2, name="Fibre_2", network=network, start=source, end=detector_2)
+source = Source(repetition_rate=1000, x=10, y=20, name="Test Source", network=network)
+
+
+fibre_1 = Fibre(fibre_length=10.0, attenuation=0.2, name="Fibre_1", network=network, start=source, end=detector_1)
+fibre_2 = Fibre(fibre_length=10.0, attenuation=0.2, name="Fibre_2", network=network, start=source, end=detector_2)
+fibre_3 = Fibre(fibre_length=10.0, attenuation=0.2, name="Fibre_3", network=network, start=source, end=detector_3)
+fibre_4 = Fibre(fibre_length=10.0, attenuation=0.2, name="Fibre_4", network=network, start=source, end=detector_4)
 
 
 
 print(network.components)
 print(network.links)
-print(fibre.connections)
 
 
 import networkx as nx
