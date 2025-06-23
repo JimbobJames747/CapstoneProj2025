@@ -7,9 +7,18 @@ class Source(Component):
     can_input = False
     can_output = True
 
-    def __init__(self, repetition_rate = 0, x = 0, y = 0, name="Source", network=None):
+    def __init__(self,
+                 repetition_rate = 0,
+                 p_entangled = 0,
+                 p_noisy = 0,
+                 x = 0, y = 0,
+                 name="Source",
+                 network=None):
         super().__init__(name=name, x=x, y=y, network=network, link=False)
         self.repetition_rate = repetition_rate  # in Hz
+        self.p_entangled = p_entangled
+        self.p_noisy = p_noisy
+        network.add_source(self)
 
     def __str__(self):
         return (
@@ -19,53 +28,26 @@ class Source(Component):
             f"inputs: {', '.join(input.name for input in self.inputs)}, "
             f"outputs: {', '.join(output.name for output in self.outputs)}"
         )
+    
+    def emit(self, time, outputs: list):
+        """
+        Simulate the emission of photons from the source.
+        This method simulates a block of time where the source emits photons
+        at the specified repetition rate.
+        """
 
+        # may change this to more outputs (for now only considering two entangled photons)
+        if len(outputs) > 2:
+            raise ValueError("Can only emit to two output fibres at once")
 
+        print(f"{self.name} emitting photons at a rate of {self.repetition_rate} Hz for {time} seconds")
 
+        # number of photons emitted on each link 
+        n_photons = self.repetition_rate * time
+        # number of entangled pairs emitted
+        n_entangled = n_photons * self.p_entangled
 
+        photons = [n_photons, n_entangled]
 
-
-network = Network(name="Test Network")
-
-detector_1 = Detector(name="Detector_1", x=30, y=50, det_efficiency=0.9, p_dark_count=0.01, network=network)
-detector_2 = Detector(name="Detector_2", x=30, y=40, det_efficiency=0.9, p_dark_count=0.01, network=network)
-detector_3 = Detector(name="Detector_3", x=30, y=30, det_efficiency=0.9, p_dark_count=0.01, network=network)
-detector_4 = Detector(name="Detector_4", x=30, y=20, det_efficiency=0.9, p_dark_count=0.01, network=network)
-
-source = Source(repetition_rate=1000, x=10, y=20, name="Test Source", network=network)
-
-
-fibre_1 = Fibre(fibre_length=10.0, attenuation=0.2, name="Fibre_1", network=network, start=source, end=detector_1)
-fibre_2 = Fibre(fibre_length=10.0, attenuation=0.2, name="Fibre_2", network=network, start=source, end=detector_2)
-fibre_3 = Fibre(fibre_length=10.0, attenuation=0.2, name="Fibre_3", network=network, start=source, end=detector_3)
-fibre_4 = Fibre(fibre_length=10.0, attenuation=0.2, name="Fibre_4", network=network, start=source, end=detector_4)
-
-
-
-print(network.components)
-print(network.links)
-
-
-import networkx as nx
-import matplotlib.pyplot as plt
-
-def draw_network(network):
-    G = nx.DiGraph()
-
-    # Add nodes
-    for component in network.components:
-        G.add_node(component.name)
-
-    # Add edges based on links
-    for link in network.links:
-        G.add_edge(link.start.name, link.end.name)
-
-    # Draw
-    nx.draw(G, with_labels=True, node_color='lightblue', node_size=1500, arrowsize=20)
-    plt.show()
-
-draw_network(network)
-
-
-
-
+        for output in outputs:
+            output.process_photons(photons)

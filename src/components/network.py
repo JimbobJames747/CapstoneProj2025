@@ -2,6 +2,8 @@
 class Network:
     def __init__(self, name: str):
         self.components = []
+        self.sources = []
+        self.detectors = []
         self.links = []
         self.name = name
 
@@ -35,3 +37,35 @@ class Network:
             link.network = None
         else:
             raise ValueError(f"Link {link} is not in the network {self.name}.")
+        
+    def add_source(self, source):
+        if source not in self.sources:
+            self.sources.append(source)
+            source.network = self
+        else:
+            raise ValueError(f"Source {source.name} is already in the network {self.name}.")
+    
+    def remove_source(self, source):
+        if source in self.sources:
+            self.sources.remove(source)
+            source.network = None
+        else:
+            raise ValueError(f"Source {source.name} is not in the network {self.name}.")
+
+    def add_detector(self, detector):
+        if detector not in self.detectors:
+            self.detectors.append(detector)
+            detector.network = self
+        else:
+            raise ValueError(f"Detector {detector.name} is already in the network {self.name}.")
+
+    def remove_detector(self, detector):
+        if detector in self.detectors:
+            self.detectors.remove(detector)
+            detector.network = None
+        else:
+            raise ValueError(f"Detector {detector.name} is not in the network {self.name}.")
+
+    def simulate(self, time):
+        for source in self.sources:
+            source.emit(time, source.outputs)
