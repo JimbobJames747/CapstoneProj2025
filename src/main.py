@@ -14,6 +14,7 @@ Todo:
 -for component classes: Lower level component class define parameters and what is conmnected to,
 higher level gui class that inherits component and does gui manipulation
 -create network class that holds all components and does the logic of the network
--change fibre to not inherit component?
+-should source include switching or should it be external? - what kind of multiplexing?
+-related to above: bipartite entanglement source or multipartite (could get complicated)
 
 """
