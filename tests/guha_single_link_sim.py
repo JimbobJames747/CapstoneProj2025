@@ -1,14 +1,16 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
+#import seaborn as sns
 import math
 
 def calc_elementary_link_success(l, N, m, alpha, det_eff, prob_dc_per_freq_per_bin, P_emission, verbose=False):
     # l # distance A-B, divided into N = 2^n EL
     # N num EL links
     # m # number of ortho frequencies
-    # prob_dc_per_freq_per_bin = 0 # prob of detecting dark count per freq Mode per time bin
+    # prob_dc_per_freq_per_bin = 0 # prob of detecting dark count -think this is worded weirdly --> per (freq Mode and time bin)***
+    # in the paper it says per freqency and time bin. I don't think it's a big deal and can just be though of as dark-click prob in a time bin.
     # P_emission # prob of generating pair every T_q seconds over M modes
+    # T_q is 1/repetition rate
     # alpha  # [db/Km]
     # free running detectors
     # det_eff # effeciency of detector
@@ -62,3 +64,5 @@ def calc_elementary_link_success(l, N, m, alpha, det_eff, prob_dc_per_freq_per_b
     fidelity_acc_sub = (a1 + d1)  / (s1)
 
     return p_succ_ent_distr, p_succ_ent_distr_minus_acc, fidelity_acc_sub, fidelity
+
+print(calc_elementary_link_success(1, 2**10, 2, 0.2, 0.5, 0.01, 0.1, verbose=True))

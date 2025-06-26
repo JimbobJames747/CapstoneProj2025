@@ -66,6 +66,6 @@ class Network:
         else:
             raise ValueError(f"Detector {detector.name} is not in the network {self.name}.")
 
-    def simulate(self, time):
+    def simulate(self, time, time_bin=0):
         for source in self.sources:
             source.emit(time, source.outputs)

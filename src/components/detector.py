@@ -11,6 +11,7 @@ class Detector(Component):
         super().__init__(name=name, x=x, y=y, network=network, link=False)
         self.det_efficiency = det_efficiency
         self.p_dark_count = p_dark_count
+        self.coincidence_window = 1.3e-10  # 130 ps
         network.add_detector(self)
 
     def __str__(self):
@@ -25,5 +26,6 @@ class Detector(Component):
     
     def process_photons(self, photons):
         detected_photons = [math.floor(photons * self.det_efficiency) for photons in photons]
+        detected_photons = [math.floor(photons)]
 
         print(f"{self.name} detected {detected_photons[0]} photons, {detected_photons[1]} were entangled!")
