@@ -51,3 +51,4 @@ class Source(Component):
 
         for output in outputs:
             output.process_photons(photons)
+
