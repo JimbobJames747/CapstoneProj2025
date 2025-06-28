@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-class TraditionalTrustedNode:
+class Traditional_single_relay_TrustedNode:
     """Traditional trusted node model: each link is evaluated independently and the smaller SKR is taken"""
     def __init__(self, d_A2R, d_R2B, pulse_rate=40e6, detector_eff=0.3,
                  fiber_loss=0.2, qber=0.01):
@@ -36,7 +36,7 @@ class TraditionalTrustedNode:
         return min(skr1, skr2)
 
 
-class QKDTrustedNode:
+class single_relay_TrustedNode:
     """Trusted node model SKR calculation with Peng-Yong Kong paper (based on Equation 16)"""
     def __init__(self, Q, M=50, pulse_rate=40e6, C=500e6):
         self.Q = Q
@@ -92,7 +92,7 @@ def plot_fig5c():
     skr_values = []
 
     for Q in Q_values:
-        node = QKDTrustedNode(Q=Q, M=15)
+        node = sigle_relay_TrustedNode(Q=Q, M=15)
         skr = node.calculate_effective_skr(qber=0.01)
         skr_kbps = skr / 1000
         skr_values.append(skr_kbps)
@@ -132,7 +132,7 @@ def compare_new_vs_traditional():
         d1 = D / total_span                # Relay to Bob
 
         # Proposed model
-        node = QKDTrustedNode(Q=Q, M=M, pulse_rate=pulse_rate, C=C)
+        node = single_relay_TrustedNode(Q=Q, M=M, pulse_rate=pulse_rate, C=C)
         node.lambda0 = node._calculate_lambda(d0, detector_eff, fiber_loss)
         node.lambda1 = node._calculate_lambda(d1, detector_eff, fiber_loss)
         node.L = int(Q * node.lambda0 * 0.5)
@@ -140,7 +140,7 @@ def compare_new_vs_traditional():
         skr_new.append(skr / 1000)  # Convert to kbps
 
         # Traditional model
-        trad_node = TraditionalTrustedNode(
+        trad_node = Traditional_single_relay_TrustedNode(
             d_A2R=d0, d_R2B=d1,
             pulse_rate=pulse_rate,
             detector_eff=detector_eff,
