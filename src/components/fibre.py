@@ -12,7 +12,8 @@ class Fibre():
         self.network = network
         self.start = start
         self.end = end
-        self.connections = [start, end]
+        self.connection_in = start
+        self.connection_out = end
         start.connectOutput(self)
         end.connectInput(self)
         network.add_link(self)
@@ -24,6 +25,12 @@ class Fibre():
             f"start: ({self.start.name}), "
             f"end: ({self.end.name})"
         )
+    
+    def process_photons(self, photons):
+        photons = [photons * (10 ** (-self.attenuation * self.fibre_length)) for photons in photons]
+        self.connection_out.process_photons(photons)
+        
+         
     
 
 

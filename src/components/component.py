@@ -22,7 +22,7 @@ class Component():
                 raise ValueError(f"Components not in the same network: {self.name} and {link.end.name}.")
             else:
                 self.inputs.append(link)
-                link.connections.append(self)
+                link.connection_out = (self)
         else:
             raise ValueError(f"Component {self.name} cannot take an input.")
 
@@ -34,7 +34,7 @@ class Component():
                 raise ValueError(f"Components not in the same network: {self.name} and {link.start.name}.")
             else:
                 self.outputs.append(link)
-                link.connections.append(self)
+                link.connection_in = (self)
         else:
             raise ValueError(f"Component {self.name} cannot output to another component.")
         
