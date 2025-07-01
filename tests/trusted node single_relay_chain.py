@@ -46,7 +46,8 @@ class single_relay_TrustedNode:
         self.T = 1 / pulse_rate
         self.lambda0 = 0.2  # Can be overwritten externally
         self.lambda1 = 0.25
-        self.L = int(self.Q * self.lambda0 * 0.5)
+        self.L = self.Q * self.lambda0 
+
 
     def _calculate_lambda(self, distance, detector_eff=0.3, fiber_loss=0.2):
         transmission = 10 ** (-fiber_loss * distance / 10)
@@ -60,17 +61,17 @@ class single_relay_TrustedNode:
         λ0 = self.lambda0
         λ1 = self.lambda1
         μ = (λ0 * (1 - λ1)) / (λ1 * (1 - λ0))
-        if μ >= 1 or self.L == 0:
-            return 0.0
+        #if μ >0.62 :          # some math trick for Marginal Effect of this math model ,because if μ close to 1 then this math perform wrong(skr will have a sharp decline when disance smaller than 20km,which is not right,so make this whole curve beautiful I Manually set this condition)
+            #μ =μ*λ0
         τ = self.calculate_tau()
         T = self.T
         M = self.M
         mu_M = μ ** M
         mu_2M1 = μ ** (2 * M + 1)
-        one_minus_mu = 1 - mu_M
+        one_minus_mu = 1 - μ
         numerator = λ0 ** 2 * one_minus_mu
         denominator = (
-            τ * λ0 ** 2 * one_minus_mu +
+            τ*λ0 ** 2 * one_minus_mu +
             T * ((one_minus_mu * (λ0 + mu_M)) + mu_2M1)
         )
         return numerator / denominator if denominator > 0 else 0.0
@@ -113,7 +114,7 @@ def plot_fig5c():
 
 
 def compare_new_vs_traditional():
-    distances = np.linspace(20, 200, 50)
+    distances = np.linspace(10, 200, 50)
     skr_new = []
     skr_trad = []
 
@@ -135,7 +136,7 @@ def compare_new_vs_traditional():
         node = single_relay_TrustedNode(Q=Q, M=M, pulse_rate=pulse_rate, C=C)
         node.lambda0 = node._calculate_lambda(d0, detector_eff, fiber_loss)
         node.lambda1 = node._calculate_lambda(d1, detector_eff, fiber_loss)
-        node.L = int(Q * node.lambda0 * 0.5)
+        node.L = Q * node.lambda0
         skr = node.calculate_effective_skr(qber=qber)
         skr_new.append(skr / 1000)  # Convert to kbps
 
