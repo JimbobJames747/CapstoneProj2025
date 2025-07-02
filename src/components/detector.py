@@ -29,3 +29,7 @@ class Detector(Component):
         detected_photons = [math.floor(photons)]
 
         print(f"{self.name} detected {detected_photons[0]} photons, {detected_photons[1]} were entangled!")
+
+        # prob of photon reaching detector is down to atenuation = Transmission coefficient, lets say 100 photons were
+        # sent and 50 reached detector. If the distribution of photons lost from time bins (actually 2xtime bin time) is uniform then
+        # overlap of photons must be 0.5x0.5=0.25 so 25 coincidences?
