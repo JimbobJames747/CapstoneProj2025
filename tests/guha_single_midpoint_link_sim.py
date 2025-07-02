@@ -3,9 +3,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import math
 
-def calc_elementary_link_success(l, N, alpha, det_eff, prob_dc_per_freq_per_bin, P_emit_1, P_emit_2=0, verbose=False):
+def calc_elementary_link_success(l, alpha, det_eff, prob_dc_per_freq_per_bin, P_emit_1, P_emit_2=0, verbose=False):
     # l # distance A-B, divided into N = 2^n EL
-    # N num EL links
     # prob_dc_per_freq_per_bin = 0 # prob of detecting dark count per freq Mode per time bin
     # P_emit_1 # prob of generating only 1 pair every T_q seconds 
     # P_emit_2 # prob of generating 2 pairs every T_q seconds
@@ -17,7 +16,7 @@ def calc_elementary_link_success(l, N, alpha, det_eff, prob_dc_per_freq_per_bin,
         print("ERROR - P(1) + P(2) + P(0) must be <= 1")
         exit(1)
     
-    transm_eta = 10**((-alpha * l) / (2 * N) / 10)
+    transm_eta = 10**((-alpha * l) / (2) / 10)
 
 
     ### Elementary link 
@@ -148,7 +147,7 @@ if __name__ == '__main__':
     #for length in lengths:
     for length in lengths:
 
-        p_succ_ent_distr, fidelity, lower_bound_rate = calc_elementary_link_success(l=length, N=1, alpha=0.2, det_eff=1, prob_dc_per_freq_per_bin=0, P_emit_1=p1, P_emit_2 = p2)
+        p_succ_ent_distr, fidelity, lower_bound_rate = calc_elementary_link_success(l=length, alpha=0.2, det_eff=1, prob_dc_per_freq_per_bin=0, P_emit_1=p1, P_emit_2 = p2)
         single_link_success_p.append((p_succ_ent_distr))
 
         fid.append(fidelity)
