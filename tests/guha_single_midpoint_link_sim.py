@@ -137,25 +137,12 @@ if __name__ == '__main__':
     lengths = np.linspace(0, 200, 200) # km 
 
     single_link_success_p = []
-    single_link_success_p_no_acc = []
 
     fid = []
-    fid_no_acc = []
-
-    single_link_success_p_nondet = []
-    single_link_success_p_no_acc_nondet = []
-
-    fid_nondet = []
-    fid_no_acc_nondet = []
-
-    dark_counts = np.linspace(0, 150, 150) # km 
-    rep_rates = np.linspace(0, 1, 50)
 
     mu = .1
     p1 = (math.e**(-mu) * mu)
     p2 = (math.e**(-mu) * mu**2) / 2
-    p_emit = 1 - (math.e**(-mu))
-    p_missing = p_emit - p2
 
 
     #for length in lengths:
@@ -166,13 +153,9 @@ if __name__ == '__main__':
 
         fid.append(fidelity)
 
-    print(p1 / ((p1 + p2 * (1 - p1))))
-        
-    v_est = (mu + 2) / (3 * mu + 2)
-    #v_est = 1 / (1 + mu)
+    # Source fid = P(pure) / P(total emissions) = P(pure) / (P emit 1 or 2 pairs)
+    print("source fidelity:", p1 / ((p1 + p2 * (1 - p1))))
 
-    f_est = (1 + 3 * v_est) / 4
-    #print(f_est)
     
     plt.figure()
     plt.title("Maximum P(Ent. Distr.) with Deterministic [-] vs. Non-Determinisitic Sources [--]")
@@ -184,7 +167,6 @@ if __name__ == '__main__':
     plt.plot(lengths, fid, color='blue', linestyle='--')
     #plt.plot(lengths, fid_nondet, color='green', linestyle='--')
 
-    plt.axhline(y=.944, color='black', linestyle='--', label='Est. Acc. Counts')
     plt.axhline(y=lower_bound_rate, color='black', linestyle='--')
 
 
