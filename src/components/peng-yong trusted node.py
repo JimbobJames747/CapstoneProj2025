@@ -69,35 +69,32 @@ class MultiRelayEquation17TrustedNode:
     
     def calculate_s1_equation16(self, lambda0, lambda1):
         """Calculate single-hop SKR using Equation 16"""
-        λ0 = lambda0 
-        λ1 = lambda1
-        
-        # Calculate probability factor μ (Equation 5)
-        if λ1 > 0 and (1 - λ0) > 0:
-            μ = (λ0 * (1 - λ1)) / (λ1 * (1 - λ0))
+        # Calculate probability factor mu (Equation 5)
+        if lambda1 > 0 and (1 - lambda0) > 0:
+            mu = (lambda0 * (1 - lambda1)) / (lambda1 * (1 - lambda0))
         else:
-            μ = 0.0
+            mu = 0.0
         
-        # Check stability condition (μ < 1)
-        if μ >= 1 or self.L == 0:
+        # Check stability condition (mu < 1)
+        if mu >= 1 or self.L == 0:
             return 0.0
         
-        # Calculate τ (auxiliary variable in Equation 16)
+        # Calculate tau (auxiliary variable in Equation 16)
         t_q = (self.Q - 1) * self.T / 2  # Block waiting time
-        τ = t_q / self.L + 1 / self.C    # τ = t_q/L + 1/C
+        tau = t_q / self.L + 1 / self.C    # tau = t_q/L + 1/C
         
         T = self.T
         M = self.M
-        mu_M = μ ** M          # μ^M
-        mu_2M1 = μ ** (2 * M + 1)  # μ^{2M+1}
-        one_minus_mu = 1 - μ   # 1 - μ
+        mu_M = mu ** M          # mu^M
+        mu_2M1 = mu ** (2 * M + 1)  # mu^{2M+1}
+        one_minus_mu = 1 - mu   # 1 - mu
         
         # Calculate numerator (Equation 16)
-        numerator = λ0 ** 2 * one_minus_mu
+        numerator = lambda0 ** 2 * one_minus_mu
         
         # Calculate denominator (Equation 16)
-        term1 = τ * λ0 ** 2 * one_minus_mu
-        term2 = T * (one_minus_mu * (λ0 + mu_M) + mu_2M1)
+        term1 = tau * lambda0 ** 2 * one_minus_mu
+        term2 = T * (one_minus_mu * (lambda0 + mu_M) + mu_2M1)
         denominator = term1 + term2
         
         # Calculate SKR1(alice-relay1)
@@ -190,7 +187,7 @@ class MultiRelayEquation17TrustedNode:
 # Example usage:
 total_distance = 100  # km
 # Case 1: User specifies relay_number
-relay_num = 10
+relay_num = 6
 model1 = MultiRelayEquation17TrustedNode(total_distance, relay_number=relay_num)
 print(f"SKR with {relay_num} relays: {model1.calc_total_skr()} kbps")
 
