@@ -8,7 +8,7 @@ class Network:
         self.name = name
 
     def __str__(self):
-        return f"Network: {self.name}"
+        return f"Network: {self.name}, Components: {len(self.components)}, Sources: {len(self.sources)}, Detectors: {len(self.detectors)}, Links: {len(self.links)}"
     
     def add_component(self, component):
         if component not in self.components:

@@ -16,6 +16,7 @@ source = Source(repetition_rate=1E6, x=10, y=20, name="Test Source", network=net
 
 fibre_1 = Fibre(fibre_length=10.0, attenuation=0.02, name="Fibre_1", network=network, start=source, end=detector_1)
 fibre_2 = Fibre(fibre_length=10.0, attenuation=0.02, name="Fibre_2", network=network, start=source, end=detector_2)
+fibre_3 = Fibre(fibre_length=10.0, attenuation=0.02, name="Fibre_3", network=network, start=source, end=detector_3)
 
 network.simulate(time=100.0)
 

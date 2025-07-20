@@ -3,11 +3,7 @@
 # params are x and y coords in drawing area.
 
 class Component():
-
-
-    def __init__(self, name, x, y, network, link=False):
-        self.x = x
-        self.y = y
+    def __init__(self, name, network, link=False):
         self.name = name
         self.outputs = []
         self.inputs = []

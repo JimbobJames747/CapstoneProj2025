@@ -1,4 +1,4 @@
-from component import Component
+from components.component import Component
 import math
 
 class Detector(Component):
@@ -7,8 +7,8 @@ class Detector(Component):
 
     def __init__(self, name="Detector", x = 0, y = 0, 
                  det_efficiency = 0, p_dark_count = 0,
-                 network=None):
-        super().__init__(name=name, x=x, y=y, network=network, link=False)
+                 network=None, trusted_node=True):
+        super().__init__(name=name, network=network, link=False)
         self.det_efficiency = det_efficiency
         self.p_dark_count = p_dark_count
         self.coincidence_window = 1.3e-10  # 130 ps
@@ -26,7 +26,7 @@ class Detector(Component):
     
     def process_photons(self, photons):
         detected_photons = [math.floor(photons * self.det_efficiency) for photons in photons]
-        detected_photons = [math.floor(photons)]
+        #detected_photons = [math.floor(photons)]
 
         print(f"{self.name} detected {detected_photons[0]} photons, {detected_photons[1]} were entangled!")
 
