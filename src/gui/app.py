@@ -80,6 +80,12 @@ class MainApp:
 
         # add fibre button clicked
         self.window.addFibreBtn.clicked.connect(self.logic.add_fibre_button_clicked)
+
+        ### presets ###
+
+        # add single link preset button clicked
+
+        self.window.addSingleLinkBtn.clicked.connect(self.logic.add_single_link_button_clicked)
         
         ####################################
         ### SELECTING COMPONENTS IN TREE ###

@@ -4,6 +4,7 @@ from components.component import Component
 from components.fibre import Fibre
 from components.detector import Detector 
 from components.source import Source
+from presets.single_link import SingleLink
 from PySide6.QtWidgets import QTreeWidget, QTreeWidgetItem
 
 # this file is the brain of the program, it connects all the backend logic to the GUI and calls backend classes like components and networks
@@ -72,6 +73,26 @@ class SlotHandler:
 
     def add_fibre_button_clicked(self):
         print("Add Fibre button clicked")
+
+    # presets
+
+    def add_single_link_button_clicked(self):
+        print("Add Single Link button clicked")
+        if self.network is not None:
+            print("Can't add a single link to a network. Close current network and click add single link again.")
+        else:
+            SingleLink(l=1, mu=1, alpha=1, det_1_eff=1, det_2_eff=1, prob_dc_per_freq_per_bin_det_1=0, prob_dc_per_freq_per_bin_det_2=0, verbose=False)
+            self.tree_single_link = QTreeWidgetItem()
+            self.tree_single_link.setText(0, "Single Link")
+            self.window.componentTree.addTopLevelItem(self.tree_single_link)
+            self.tree_single_link_source = QTreeWidgetItem()
+            self.tree_single_link_source.setText(0, "Source")
+            self.tree_single_link.addChild(self.tree_single_link_source)
+            for i in range(2):
+                self.tree_single_link_detector = QTreeWidgetItem()
+                self.tree_single_link_detector.setText(0, "Detector {}".format(i + 1))
+                self.tree_single_link.addChild(self.tree_single_link_detector)
+            self.tree_single_link.setExpanded(True)
 
     ### SELECTING COMPONENTS IN TREE ###
 
