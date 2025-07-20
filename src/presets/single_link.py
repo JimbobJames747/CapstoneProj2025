@@ -37,103 +37,174 @@ class SingleLink(l, mu, alpha, det_1_eff, det_2_eff, prob_dc_per_freq_per_bin_de
 
 
         ### Elementary link 
-        total_eff = transm_eta * det_eff
+        total_eff_1 = transm_eta * det_1_eff
+        total_eff_2 = transm_eta * det_2_eff
+
 
         # P(detector clicks per time bin)
-        P_det_clicks_1_pair =  (P_emit_1 * total_eff) + (prob_dc_per_freq_per_bin * (1 - (P_emit_1 * total_eff))) # extension of Eq 6
+        P_det_clicks_1_pair_det_1 =  (P_emit_1 * total_eff_1) + (prob_dc_per_freq_per_bin_det_1 * (1 - (P_emit_1 * total_eff_1))) # extension of Eq 6
 
-        P_det_clicks_1_pair_squared = (
-            prob_dc_per_freq_per_bin**2 * P_emit_1 * total_eff**2
-                - 2 * prob_dc_per_freq_per_bin**2 * P_emit_1 * total_eff
-                + prob_dc_per_freq_per_bin**2
-                - 2 * prob_dc_per_freq_per_bin * P_emit_1 * total_eff**2
-                + 2 * prob_dc_per_freq_per_bin * P_emit_1 * total_eff
-                + P_emit_1 * total_eff**2
-        ) # extension of Eq 6
+        P_det_clicks_1_pair_det_2 =  (P_emit_1 * total_eff_2) + (prob_dc_per_freq_per_bin_det_1 * (1 - (P_emit_1 * total_eff_1))) # extension of Eq 6
 
-        
-        P_det_clicks_2_pair = (
-            (P_emit_1 * total_eff) + 
-            ((1 - P_emit_1 * total_eff) * P_emit_2 * total_eff) + 
-            ((1 - P_emit_1 * total_eff) * (1 - P_emit_2 * total_eff) * prob_dc_per_freq_per_bin)
-        )
-        
         a = P_emit_1
         b = P_emit_2
-        c = prob_dc_per_freq_per_bin
-        x = total_eff
+        j = prob_dc_per_freq_per_bin_det_1
+        k = prob_dc_per_freq_per_bin_det_2
+        x = total_eff_1
+        y = total_eff_2
 
-        P_det_clicks_2_pair_squared = (
-            a * b * c**2 * x**4
-            - 2 * a * b * c * x**4
-            + a * b * x**4
-            - 2 * a * b * c**2 * x**3
-            + 4 * a * b * c * x**3
-            - 2 * a * b * x**3
-            + a * c**2 * x**2
-            - 2 * a * c * x**2
-            + a * x**2
-            - 2 * a * b * c**2 * x**3
-            + 4 * a * b * c * x**3
-            - 2 * a * b * x**3
-            + 4 * a * b * c**2 * x**2
-            - 6 * a * b * c * x**2
-            + 2 * a * b * x**2
-            - 2 * a * c**2 * x
-            + 2 * a * c * x
-            + b * c**2 * x**2
-            - 2 * b * c * x**2
-            + b * x**2
-            - 2 * b * c**2 * x
-            + 2 * b * c * x
-            + c**2
+        P_both_click_1_pair = (
+            a * j * k * x * y
+            + a * (-j) * x * y
+            - a * k * x * y
+            + a * x * y
+            - a * j * k * x
+            - a * j * k * y
+            + a * j * y
+            + a * k * x
+            + j * k
         )
+
+        
+        P_det_clicks_2_pair_det_1 = (
+            (P_emit_1 * total_eff_1) + 
+            ((1 - P_emit_1 * total_eff_1) * P_emit_2 * total_eff_1) + 
+            ((1 - P_emit_1 * total_eff_1) * (1 - P_emit_2 * total_eff_1) * prob_dc_per_freq_per_bin_det_1)
+        )
+
+        P_det_clicks_2_pair_det_2 = (
+            (P_emit_1 * total_eff_2) + 
+            ((1 - P_emit_1 * total_eff_2) * P_emit_2 * total_eff_2) + 
+            ((1 - P_emit_1 * total_eff_2) * (1 - P_emit_2 * total_eff_2) * prob_dc_per_freq_per_bin_det_2)
+        )
+        
+
+        P_both_click_2_pair = (
+        a * b * j * k * x**2 * y**2
+        - a * b * j * x**2 * y**2
+        - a * b * k * x**2 * y**2
+        + a * b * x**2 * y**2
+        - a * b * j * k * x**2 * y
+        - a * b * j * k * x * y**2
+        + a * b * j * x**2 * y
+        + a * b * j * x * y**2
+        + a * b * k * x**2 * y
+        + a * b * k * x * y**2
+        - a * b * x**2 * y
+        - a * b * x * y**2
+        + a * j * k * x * y
+        - a * j * x * y
+        - a * k * x * y
+        + a * x * y
+        - a * b * j * k * x**2 * y
+        - a * b * j * k * x * y**2
+        + a * b * j * x**2 * y
+        + a * b * j * x * y**2
+        + a * b * k * x**2 * y
+        + a * b * k * x * y**2
+        - a * b * x**2 * y
+        - a * b * x * y**2
+        + a * b * j * k * x**2
+        + 2 * a * b * j * k * x * y
+        + a * b * j * k * y**2
+        - 2 * a * b * j * x * y
+        - a * b * j * y**2
+        - a * b * k * x**2
+        - 2 * a * b * k * x * y
+        + 2 * a * b * x * y
+        - a * j * k * x
+        - a * j * k * y
+        + a * j * y
+        + a * k * x
+        + b * j * k * x * y
+        - b * j * x * y
+        - b * k * x * y
+        + b * x * y
+        - b * j * k * x
+        - b * j * k * y
+        + b * j * y
+        + b * k * x
+        + j * k
+    )
         
 
 
         # P of correct detection sequence from true detections
         # sent and received 2 True AND no DC
-        P_true_detection_1_pair = ((P_det_clicks_1_pair_squared * (1 - prob_dc_per_freq_per_bin)**2))  # eq 11
-        P_true_detection_2_pair = ((P_det_clicks_2_pair_squared * (1 - prob_dc_per_freq_per_bin)**2))  # eq 11
+        P_true_detection_1_pair = (P_both_click_1_pair * (1 - prob_dc_per_freq_per_bin_det_1) * (1 - prob_dc_per_freq_per_bin_det_2))  # eq 11
+
+        P_true_detection_2_pair = (P_both_click_2_pair * (1 - prob_dc_per_freq_per_bin_det_1) * (1 - prob_dc_per_freq_per_bin_det_2))  # eq 11
 
 
-        one_minus_prob_detection_1_pair_sq = (P_emit_1 * total_eff**2 * prob_dc_per_freq_per_bin**2) - (2 * P_emit_1 * total_eff**2 * prob_dc_per_freq_per_bin) + (P_emit_1 * total_eff**2) - (2 * P_emit_1 * total_eff * prob_dc_per_freq_per_bin**2) + (4 * P_emit_1 * total_eff * prob_dc_per_freq_per_bin) - (2 * P_emit_1 * total_eff) + (prob_dc_per_freq_per_bin**2) - (2 * prob_dc_per_freq_per_bin) + 1
+        one_minus_both_click_2_pair_squared = (
+            -a * b * j * k * x**2 * y**2
+            + a * b * j * x**2 * y**2
+            + a * b * k * x**2 * y**2
+            + a * (-b) * x**2 * y**2
+            + a * b * j * k * x**2 * y
+            + a * b * j * k * x * y**2
+            - a * b * j * x**2 * y
+            - a * b * j * x * y**2
+            - a * b * k * x**2 * y
+            - a * b * k * x * y**2
+            + a * b * x**2 * y
+            + a * b * x * y**2
+            - a * j * k * x * y
+            + a * j * x * y
+            + a * k * x * y
+            - a * x * y
+            + a * b * j * k * x**2 * y
+            + a * b * j * k * x * y**2
+            - a * b * j * x**2 * y
+            - a * b * j * x * y**2
+            - a * b * k * x**2 * y
+            - a * b * k * x * y**2
+            + a * b * x**2 * y
+            + a * b * x * y**2
+            - a * b * j * k * x**2
+            - 2 * a * b * j * k * x * y
+            - a * b * j * k * y**2
+            + 2 * a * b * j * x * y
+            + a * b * j * y**2
+            + a * b * k * x**2
+            + 2 * a * b * k * x * y
+            - 2 * a * b * x * y
+            + a * j * k * x
+            + a * j * k * y
+            - a * j * y
+            - a * k * x
+            - b * j * k * x * y
+            + b * j * x * y
+            + b * k * x * y
+            - b * x * y
+            + b * j * k * x
+            + b * j * k * y
+            - b * j * y
+            - b * k * x
+            - j * k
+            + 1
+        )
 
-        one_minus_prob_detection_2_pair_sq = (
-                a * b * c**2 * x**4
-                - 2 * a * b * c * x**4
-                + a * b * x**4
-                - 2 * a * b * c**2 * x**3
-                + 4 * a * b * c * x**3
-                - 2 * a * b * x**3
-                + a * c**2 * x**2
-                - 2 * a * c * x**2
-                + a * x**2
-                - 2 * a * b * c**2 * x**3
-                + 4 * a * b * c * x**3
-                - 2 * a * b * x**3
-                + 4 * a * b * c**2 * x**2
-                - 8 * a * b * c * x**2
-                + 4 * a * b * x**2
-                - 2 * a * c**2 * x
-                + 4 * a * c * x
-                - 2 * a * x
-                + b * c**2 * x**2
-                - 2 * b * c * x**2
-                + b * x**2
-                - 2 * b * c**2 * x
-                + 4 * b * c * x
-                - 2 * b * x
-                + c**2
-                - 2 * c
-                + 1
-            )
+        one_minus_both_click_1_pair_squared = (
+            -a * j * k * x * y
+            + a * j * x * y
+            + a * k * x * y
+            - a * x * y
+            + a * j * k * x
+            + a * j * k * y
+            - a * j * y
+            - a * k * x
+            - j * k
+            + 1
+        )
         
         # P of correct detection sequence from false detections
         # lost 1 and detected 1 dark OR lost 2 and detected 2 dark
-        P_false_detection_1_pair = (2 * P_det_clicks_1_pair * prob_dc_per_freq_per_bin * (1 -  P_det_clicks_1_pair) * (1 - prob_dc_per_freq_per_bin)) + ((prob_dc_per_freq_per_bin**2 * one_minus_prob_detection_1_pair_sq)) # eq 12
 
-        P_false_detection_2_pair = (2 * P_det_clicks_2_pair * prob_dc_per_freq_per_bin * (1 -  P_det_clicks_2_pair) * (1 - prob_dc_per_freq_per_bin)) + ((prob_dc_per_freq_per_bin**2 * one_minus_prob_detection_2_pair_sq)) # eq 12
+
+        P_false_detection_1_pair = (P_det_clicks_1_pair_det_1 * prob_dc_per_freq_per_bin_det_2 * (1 -  P_det_clicks_1_pair_det_1) * (1 - prob_dc_per_freq_per_bin_det_2)) + (P_det_clicks_1_pair_det_2 * prob_dc_per_freq_per_bin_det_1 * (1 -  P_det_clicks_1_pair_det_2) * (1 - prob_dc_per_freq_per_bin_det_1)) + ((prob_dc_per_freq_per_bin_det_1 * prob_dc_per_freq_per_bin_det_2 * one_minus_both_click_1_pair_squared)) # eq 12
+
+        P_false_detection_2_pair = (P_det_clicks_2_pair_det_1 * prob_dc_per_freq_per_bin_det_2 * (1 -  P_det_clicks_2_pair_det_1) * (1 - prob_dc_per_freq_per_bin_det_2)) + (P_det_clicks_2_pair_det_2 * prob_dc_per_freq_per_bin_det_1 * (1 -  P_det_clicks_2_pair_det_2) * (1 - prob_dc_per_freq_per_bin_det_1)) + ((prob_dc_per_freq_per_bin_det_1 * prob_dc_per_freq_per_bin_det_2 * one_minus_both_click_2_pair_squared)) # eq 12 # eq 12
 
     
 
@@ -142,7 +213,7 @@ class SingleLink(l, mu, alpha, det_1_eff, det_2_eff, prob_dc_per_freq_per_bin_de
 
         fidelity = (P_true_detection_1_pair)  / (P_all_counts_2_pair)
 
-        lower_bound_rate = prob_dc_per_freq_per_bin**2 * (1 - prob_dc_per_freq_per_bin)**2
+        lower_bound_rate = prob_dc_per_freq_per_bin_det_1* prob_dc_per_freq_per_bin_det_2 * (1 - prob_dc_per_freq_per_bin_det_1) * (1 - prob_dc_per_freq_per_bin_det_2)
 
         #return P_all_counts_2_pair, fidelity
         return P_true_detection_1_pair, fidelity
