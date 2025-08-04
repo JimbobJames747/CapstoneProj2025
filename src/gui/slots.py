@@ -75,6 +75,7 @@ class SlotHandler:
         print("Add Fibre button clicked")
 
     # presets
+    ### single link ###
 
     def add_single_link_button_clicked(self):
         print("Add Single Link button clicked")
