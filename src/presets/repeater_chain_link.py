@@ -116,6 +116,11 @@ class RepeaterChain:
  
                 false_2_pair_1 += p_e * math.comb(x, 2) * self.total_eff_1 * (1 - self.total_eff_1)**(x-1) * prob_at_least_one_storage
                 false_2_pair_2 += p_e * math.comb(x, 2) * self.total_eff_2 * (1 - self.total_eff_2)**(x-1) * prob_at_least_one_storage
+
+                false_2_pair_1 += (p_e * (1 - self.total_eff_1)**(x) * self.P_el_dc_per_bin_per_freq * prob_at_least_one_storage)
+
+                false_2_pair_2 += (p_e * (1 - self.total_eff_2)**(x) * self.P_el_dc_per_bin_per_freq * prob_at_least_one_storage)
+             
         
  
         A_e_true_1 = true_2_pair_1 
@@ -124,8 +129,8 @@ class RepeaterChain:
         p_click_1 = A_e_true_1 + false_2_pair_1 
         p_click_2 = A_e_true_2 + false_2_pair_2
 
-        A_e_1 = p_click_1 + (self.P_el_dc_per_bin_per_freq * (1 - p_click_1))
-        A_e_2 = p_click_2 + (self.P_el_dc_per_bin_per_freq * (1 - p_click_2))
+        A_e_1 = p_click_1 
+        A_e_2 = p_click_2 
 
         A_e_false_1 = A_e_1 - A_e_true_1
         A_e_false_2 = A_e_2 - A_e_true_2
@@ -192,8 +197,8 @@ class RepeaterChain:
                 true_2_pair_2 += p_e * math.comb(x, 1) * self.total_eff_2 * (1 - self.total_eff_2)**(x-1) * self.eff_loading_qm * (1 - self.eff_loading_qm)**(x-1)
  
                 prob_at_least_one_storage = (1 - (1 - self.eff_loading_qm)**(x))
-                prob_at_least_one_detection_1 = (1 - (1 - self.total_eff_1)**(x))
-                prob_at_least_one_detection_2 = (1 - (1 - self.total_eff_2)**(x))
+                prob_at_least_one_detection_1 = (1 - (1 - self.total_eff_1)**(x)) + ((1 - self.total_eff_1)**x * self.P_el_dc_per_bin_per_freq)
+                prob_at_least_one_detection_2 = (1 - (1 - self.total_eff_2)**(x)) + ((1 - self.total_eff_2)**x * self.P_el_dc_per_bin_per_freq)
  
                 p_all_detections_1 += p_e * prob_at_least_one_detection_1 * prob_at_least_one_storage
                 p_all_detections_2 += p_e * prob_at_least_one_detection_2 * prob_at_least_one_storage
@@ -205,8 +210,8 @@ class RepeaterChain:
         p_click_1 = p_all_detections_1 
         p_click_2 = p_all_detections_2
 
-        A_e_1 = p_click_1 + (self.P_el_dc_per_bin_per_freq * (1 - p_click_1))
-        A_e_2 = p_click_2 + (self.P_el_dc_per_bin_per_freq * (1 - p_click_2))
+        A_e_1 = p_click_1 
+        A_e_2 = p_click_2
 
         A_e_false_1 = A_e_1 - A_e_true_1
         A_e_false_2 = A_e_2 - A_e_true_2
@@ -355,7 +360,7 @@ if __name__ == "__main__":
     # probably don't look at, cause jake does in his section
     mu= .1
     
-    lengths = np.linspace(0, 3000, 1000)  # km
+    lengths = np.linspace(0, 2000, 1000)  # km
 
     for l in lengths:
         rep_a = RepeaterChain(
@@ -380,7 +385,7 @@ if __name__ == "__main__":
 
         rep_a = RepeaterChain(
             source_rep_rate=source_rep_rate,
-            detector_type='PNR',
+            detector_type='non_PNR',
             l=l,
             m=m,
             alpha=alpha,
@@ -400,7 +405,7 @@ if __name__ == "__main__":
 
         rep_a = RepeaterChain(
             source_rep_rate=source_rep_rate,
-            detector_type='PNR',
+            detector_type='guha',
             l=l,
             m=m,
             alpha=alpha,
