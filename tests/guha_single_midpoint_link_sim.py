@@ -157,30 +157,12 @@ if __name__ == '__main__':
 
     
     plt.figure()
-    plt.title("Maximum P(Ent. Distr.) with Deterministic [-] vs. Non-Determinisitic Sources [--]")
     plt.xlabel("Length")
-    plt.ylabel("Maximum P(Entanglement Distribution)")
-    plt.plot(lengths, single_link_success_p, color='blue', linestyle='-', label='0.2')
-    #plt.plot(lengths, single_link_success_p_nondet, color='green', linestyle='-', label='0')
+    plt.plot(lengths, single_link_success_p, color='blue', linestyle='-', label='Prob(Ent Distr) per Pulse')
 
-    plt.plot(lengths, fid, color='blue', linestyle='--')
-    #plt.plot(lengths, fid_nondet, color='green', linestyle='--')
+    plt.plot(lengths, fid, color='blue', linestyle='-')
 
-    plt.axhline(y=lower_bound_rate, color='black', linestyle='--')
-
-
-
-    plt.grid(True)
-    plt.tight_layout()
-    plt.legend()
-    plt.show()
-
-    plt.figure()
-    plt.title("")
-    plt.xlabel("Length")
-    plt.ylabel("Fidelity")
-    plt.plot(lengths, fid, label='with acc')
-    plt.plot(lengths, fid_no_acc, label='remove acc')
+    plt.axhline(y=lower_bound_rate, color='black', linestyle='--', label='Ent. Fidelity')
 
     plt.grid(True)
     plt.tight_layout()

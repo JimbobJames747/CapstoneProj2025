@@ -1,7 +1,7 @@
-from component import *
-from fibre import Fibre
-from detector import Detector
-from network import Network
+from components.component import *
+from components.fibre import Fibre
+from components.detector import Detector
+from components.network import Network
 
 class Source(Component):
     can_input = False
@@ -14,7 +14,7 @@ class Source(Component):
                  x = 0, y = 0,
                  name="Source",
                  network=None):
-        super().__init__(name=name, x=x, y=y, network=network, link=False)
+        super().__init__(name=name, network=network, link=False)
         self.repetition_rate = repetition_rate  # in Hz
         self.p_entangled = p_entangled
         self.p_noisy = p_noisy
@@ -36,9 +36,9 @@ class Source(Component):
         at the specified repetition rate.
         """
 
-        # may change this to more outputs (for now only considering two entangled photons)
-        if len(outputs) > 2:
-            raise ValueError("Can only emit to two output fibres at once")
+        # may change this to more outputs (for now only considering four entangled photons)
+        if len(outputs) > 4:
+            raise ValueError("Can only emit to four output fibres at once")
 
         print(f"{self.name} emitting photons at a rate of {self.repetition_rate} Hz for {time} seconds")
 

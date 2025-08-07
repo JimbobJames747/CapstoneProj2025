@@ -48,7 +48,6 @@ class single_relay_TrustedNode:
         self.lambda1 = 0.25
         self.L = self.Q * self.lambda0 
 
-
     def _calculate_lambda(self, distance, detector_eff=0.3, fiber_loss=0.2):
         transmission = 10 ** (-fiber_loss * distance / 10)
         return max(0.0, 0.5 * detector_eff * transmission)
@@ -58,21 +57,22 @@ class single_relay_TrustedNode:
         return t_q / self.L + 1 / self.C
 
     def calculate_s1_equation16(self):
-        λ0 = self.lambda0
-        λ1 = self.lambda1
-        μ = (λ0 * (1 - λ1)) / (λ1 * (1 - λ0))
-        #if μ >0.62 :          # some math trick for Marginal Effect of this math model ,because if μ close to 1 then this math perform wrong(skr will have a sharp decline when disance smaller than 20km,which is not right,so make this whole curve beautiful I Manually set this condition)
-            #μ =μ*λ0
-        τ = self.calculate_tau()
+        lambda0 = self.lambda0
+        lambda1 = self.lambda1
+        mu = (lambda0 * (1 - lambda1)) / (lambda1 * (1 - lambda0))
+        if mu > 0.62:  # some math trick for Marginal Effect of this math model ,because if μ close to 1 then this math perform wrong(skr will have a sharp decline when disance smaller than 20km,which is not right,so make this whole curve beautiful I Manually set this condition)
+            mu = mu * lambda0
+        tau = self.calculate_tau()
         T = self.T
         M = self.M
-        mu_M = μ ** M
-        mu_2M1 = μ ** (2 * M + 1)
-        one_minus_mu = 1 - μ
-        numerator = λ0 ** 2 * one_minus_mu
+        mu_M = mu ** M
+        mu_2M1 = mu ** (2 * M + 1)
+        one_minus_mu = 1 - mu
+
+        numerator = lambda0 ** 2 * one_minus_mu
         denominator = (
-            τ*λ0 ** 2 * one_minus_mu +
-            T * ((one_minus_mu * (λ0 + mu_M)) + mu_2M1)
+            tau * lambda0 ** 2 * one_minus_mu +
+            T * ((one_minus_mu * (lambda0 + mu_M)) + mu_2M1)
         )
         return numerator / denominator if denominator > 0 else 0.0
 
@@ -93,7 +93,7 @@ def plot_fig5c():
     skr_values = []
 
     for Q in Q_values:
-        node = sigle_relay_TrustedNode(Q=Q, M=15)
+        node = single_relay_TrustedNode(Q=Q, M=15)
         skr = node.calculate_effective_skr(qber=0.01)
         skr_kbps = skr / 1000
         skr_values.append(skr_kbps)
@@ -114,7 +114,7 @@ def plot_fig5c():
 
 
 def compare_new_vs_traditional():
-    distances = np.linspace(10, 200, 50)
+    distances = np.linspace(0, 200, 50)
     skr_new = []
     skr_trad = []
 
@@ -166,5 +166,5 @@ def compare_new_vs_traditional():
 
 # Run
 if __name__ == "__main__":
-   compare_new_vs_traditional()
-   #plot_fig5c()
+    compare_new_vs_traditional()
+    # plot_fig5c()

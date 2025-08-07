@@ -1,4 +1,4 @@
-from component import Component
+from components.component import Component
 import math
 
 class Detector(Component):
@@ -7,8 +7,8 @@ class Detector(Component):
 
     def __init__(self, name="Detector", x = 0, y = 0, 
                  det_efficiency = 0, p_dark_count = 0,
-                 network=None):
-        super().__init__(name=name, x=x, y=y, network=network, link=False)
+                 network=None, trusted_node=True):
+        super().__init__(name=name, network=network, link=False)
         self.det_efficiency = det_efficiency
         self.p_dark_count = p_dark_count
         self.coincidence_window = 1.3e-10  # 130 ps
@@ -26,6 +26,10 @@ class Detector(Component):
     
     def process_photons(self, photons):
         detected_photons = [math.floor(photons * self.det_efficiency) for photons in photons]
-        detected_photons = [math.floor(photons)]
+        #detected_photons = [math.floor(photons)]
 
         print(f"{self.name} detected {detected_photons[0]} photons, {detected_photons[1]} were entangled!")
+
+        # prob of photon reaching detector is down to atenuation = Transmission coefficient, lets say 100 photons were
+        # sent and 50 reached detector. If the distribution of photons lost from time bins (actually 2xtime bin time) is uniform then
+        # overlap of photons must be 0.5x0.5=0.25 so 25 coincidences?

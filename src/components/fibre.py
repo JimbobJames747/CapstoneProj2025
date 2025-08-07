@@ -1,5 +1,6 @@
-from component import Component
-from network import Network
+#from component import Component
+from components.component import Component
+from components.network import Network
 
 class Fibre():
     can_input = True
