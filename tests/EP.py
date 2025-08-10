@@ -164,19 +164,7 @@ def hashing_bound(F_in):
         return max(0.0, E_hash)
     
 def figure(F_range=(0.5, 1), N=2, rounds=3):
-    """
-    绘制三个协议在 noise=False, measurement_purification=False 时的输出保真度随输入保真度变化的曲线。
     
-    参数:
-    - F_range: (min, max) 输入保真度范围
-    - N: multi_copy_purify 中的副本数
-    - rounds: nested_dejmps 中的迭代轮数
-    - scenario: hyperentangled_purify 中的场景编号 (1, 2, 3)
-    - eta, A, B, C: hyperentangled_purify 的参数
-    """
-    F_values = np.linspace(F_range[0], F_range[1], 200)
-
-    # 三个协议的结果列表
     multi_out = []
     nested_out = []
     hyper_out_1 = []
@@ -230,4 +218,5 @@ def figure(F_range=(0.5, 1), N=2, rounds=3):
 
 
     """if __name__ == "__main__":"""
+
 figure(F_range=(0.5, 1), N=2, rounds=3)
