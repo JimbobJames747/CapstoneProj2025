@@ -10,6 +10,7 @@ class EuCrystalAFC(AFC):
         in_storage_time: float, 
         in_fidelity: float, 
         long_storage: bool = False, 
+        qfcd: bool = True,
         verbose: bool = False
     ):
         super().__init__(name, in_wavelength, in_storage_time, in_fidelity, verbose)
@@ -33,6 +34,14 @@ class EuCrystalAFC(AFC):
             self.set_memory_param("bandwidth", EU_SHORT_AFC_MEMORY_BANDWIDTH)
             self.set_memory_param("temperature", EU_SHORT_AFC_MEMORY_TEMPERATURE)
             self.set_memory_param("magnetic_field", EU_SHORT_AFC_MEMORY_MAGNETIC_FIELD)
+
+        # Set QFCD parameters only if enabled
+        if qfcd:
+            self.set_memory_param("fidelity", QFCD_FIDELITY)
+            self.set_memory_param(
+                "efficiency",
+                EU_AFC_MEMORY_EFFICIENCY * TRANSMISSION_EFFICIENCY * PR_QFCD_EFFICIENCY
+            )
 
         # Check input validity against memory parameters
         self.check_input_validity()

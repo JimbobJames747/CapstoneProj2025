@@ -27,7 +27,7 @@ VAPOUR_EIT_MEMORY_BANDWIDTH = 1                     # [MHz]
 VAPOUR_EIT_MEMORY_TEMPERATURE = 368                 # [K]
 VAPOUR_EIT_MEMORY_MAGNETIC_FIELD = 0                # [T]
 VAPOUR_EIT_MEMORY_WAVELENGTH = 795e-9               # [m]
-VAPOUR_EIT_MEMORY_MULTIMODE_CAPACITY = 60           # [dimensionless]
+VAPOUR_EIT_MEMORY_MULTIMODE_CAPACITY = 1            # [dimensionless]
 
 #####################################
 # Global Parameters for Rb Vapour far-off Raman Memory 
@@ -39,7 +39,7 @@ VAPOUR_RAMAN_MEMORY_BANDWIDTH = 100                 # [MHz]
 VAPOUR_RAMAN_MEMORY_TEMPERATURE = 351.7             # [K]
 VAPOUR_RAMAN_MEMORY_MAGNETIC_FIELD = 0              # [T]
 VAPOUR_RAMAN_MEMORY_WAVELENGTH = 795e-9             # [m]
-VAPOUR_RAMAN_MEMORY_MULTIMODE_CAPACITY = 1          # [dimensionless]
+VAPOUR_RAMAN_MEMORY_MULTIMODE_CAPACITY = 60         # [dimensionless]
 
 #####################################
 # Global Parameters for Er Crystal AFC Memory 
@@ -76,18 +76,25 @@ EU_LONG_AFC_MEMORY_MAGNETIC_FIELD = 1.3                 # [T]
 
 
 #####################################
-# Global Parameters for Rb Ensemble DLCZ Memory 
+# Global Parameters for Pr Ensemble GEM Memory 
 #####################################
-Rb_DLCZ_MEMORY_FIDELITY = 0.92
-Rb_DLCZ_MEMORY_EFFICIENCY = 0.38
-Rb_DLCZ_MEMORY_STORAGE_TIME = 0.1                  # [s]
-Rb_DLCZ_MEMORY_BANDWIDTH = 9.2                      # [MHz]
-Rb_DLCZ_MEMORY_TEMPERATURE = 12e-6                   # [K]
-Rb_DLCZ_MEMORY_MAGNETIC_FIELD = 10e-6              # [T]
-Rb_DLCZ_MEMORY_WAVELENGTH = 780e-9                 # [m]
-Rb_DLCZ_MEMORY_MULTIMODE_CAPACITY = 1              # [dimensionless]
+PR_GEM_MEMORY_FIDELITY = 0.98
+PR_GEM_MEMORY_EFFICIENCY = 0.69
+PR_GEM_MEMORY_STORAGE_TIME = 1.2e-3               # [s]
+PR_GEM_MEMORY_BANDWIDTH = 0.14                    # [MHz]
+PR_GEM_MEMORY_TEMPERATURE = 3                     # [K]
+PR_GEM_MEMORY_MAGNETIC_FIELD = 0                  # [T]
+PR_GEM_MEMORY_WAVELENGTH = 606e-9                 # [m]
+PR_GEM_MEMORY_MULTIMODE_CAPACITY = 10e4           # [dimensionless]
 
 
+#####################################
+# Global Parameters for QFCD 
+#####################################
+QFCD_FIDELITY = 0.94
+TRANSMISSION_EFFICIENCY = 0.77
+RB_QFCD_EFFICIENCY = 0.136
+PR_QFCD_EFFICIENCY = 0.245
 
 
 

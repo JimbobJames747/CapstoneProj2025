@@ -51,6 +51,7 @@ class QuantumMemory:
     @property
     def summary(self):
         print("=== Internal Memory Parameters ===")
+        print(f"Name: {self._name}")
         for k, v in self._memory_params.items():
             unit = {
                 "storage_time": "s",
