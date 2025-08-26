@@ -81,6 +81,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.paramSelect = QWidget(self.centralwidget)
         self.paramSelect.setObjectName(u"paramSelect")
+        self.paramSelect.setMinimumSize(QSize(600, 0))
         self.paramSelect.setMaximumSize(QSize(300, 16777215))
         self.paramSelect.setCursor(QCursor(Qt.CursorShape.ArrowCursor))
         self.paramSelect.setStyleSheet(u"QWidget#paramSelect {\n"
@@ -95,62 +96,52 @@ class Ui_MainWindow(object):
         self.label = QLabel(self.paramSelect)
         self.label.setObjectName(u"label")
         font1 = QFont()
-        font1.setFamilies([u"Verdana"])
-        font1.setPointSize(12)
+        font1.setFamilies([u"Roboto Medium"])
+        font1.setPointSize(14)
         self.label.setFont(font1)
         self.label.setStyleSheet(u"")
 
         self.verticalLayout_4.addWidget(self.label)
 
-        self.treeWidget = QTreeWidget(self.paramSelect)
-        __qtreewidgetitem = QTreeWidgetItem()
-        __qtreewidgetitem.setFont(0, font1);
-        __qtreewidgetitem.setBackground(0, QColor(36, 88, 104));
-        self.treeWidget.setHeaderItem(__qtreewidgetitem)
-        __qtreewidgetitem1 = QTreeWidgetItem(self.treeWidget)
-        QTreeWidgetItem(__qtreewidgetitem1)
-        __qtreewidgetitem2 = QTreeWidgetItem(self.treeWidget)
-        QTreeWidgetItem(__qtreewidgetitem2)
-        __qtreewidgetitem3 = QTreeWidgetItem(self.treeWidget)
-        __qtreewidgetitem4 = QTreeWidgetItem(__qtreewidgetitem3)
-        QTreeWidgetItem(__qtreewidgetitem4)
-        self.treeWidget.setObjectName(u"treeWidget")
+        self.componentTree = QTreeWidget(self.paramSelect)
+        self.componentTree.setObjectName(u"componentTree")
         font2 = QFont()
-        font2.setFamilies([u"Verdana"])
-        font2.setPointSize(10)
-        self.treeWidget.setFont(font2)
-        self.treeWidget.viewport().setProperty(u"cursor", QCursor(Qt.CursorShape.PointingHandCursor))
-        self.treeWidget.setStyleSheet(u"QTreeWidget {\n"
+        font2.setFamilies([u"Roboto Medium"])
+        font2.setPointSize(12)
+        self.componentTree.setFont(font2)
+        self.componentTree.viewport().setProperty(u"cursor", QCursor(Qt.CursorShape.PointingHandCursor))
+        self.componentTree.setStyleSheet(u"QTreeWidget {\n"
 "	color: white;\n"
 "	border: 2px solid black;\n"
 "	background-color: rgb(36, 88, 104)\n"
 "}")
 
-        self.verticalLayout_4.addWidget(self.treeWidget)
+        self.verticalLayout_4.addWidget(self.componentTree)
 
-        self.label_5 = QLabel(self.paramSelect)
-        self.label_5.setObjectName(u"label_5")
-        self.label_5.setFont(font1)
+        self.selectedComponentLabel = QLabel(self.paramSelect)
+        self.selectedComponentLabel.setObjectName(u"selectedComponentLabel")
+        self.selectedComponentLabel.setFont(font1)
 
-        self.verticalLayout_4.addWidget(self.label_5)
+        self.verticalLayout_4.addWidget(self.selectedComponentLabel)
 
-        self.tableWidget = QTableWidget(self.paramSelect)
-        if (self.tableWidget.columnCount() < 2):
-            self.tableWidget.setColumnCount(2)
+        self.paramTable = QTableWidget(self.paramSelect)
+        if (self.paramTable.columnCount() < 2):
+            self.paramTable.setColumnCount(2)
         __qtablewidgetitem = QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(0, __qtablewidgetitem)
+        self.paramTable.setHorizontalHeaderItem(0, __qtablewidgetitem)
         __qtablewidgetitem1 = QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(1, __qtablewidgetitem1)
-        self.tableWidget.setObjectName(u"tableWidget")
-        self.tableWidget.setStyleSheet(u"QTableWidget {\n"
-"	color: black;\n"
-"	background-color: rgb(36, 88, 104)\n"
-"}\n"
-"QWidget#tableWidget {\n"
+        self.paramTable.setHorizontalHeaderItem(1, __qtablewidgetitem1)
+        self.paramTable.setObjectName(u"paramTable")
+        self.paramTable.setMinimumSize(QSize(500, 0))
+        self.paramTable.setFont(font2)
+        self.paramTable.setStyleSheet(u"QTableWidget {\n"
+"	color: white;\n"
+"	background-color: rgb(36, 88, 104);\n"
 "	border: 2px solid black\n"
-"}")
+"}\n"
+"")
 
-        self.verticalLayout_4.addWidget(self.tableWidget)
+        self.verticalLayout_4.addWidget(self.paramTable)
 
 
         self.horizontalLayout.addWidget(self.paramSelect)
@@ -158,47 +149,24 @@ class Ui_MainWindow(object):
         self.drawingArea = QFrame(self.centralwidget)
         self.drawingArea.setObjectName(u"drawingArea")
         self.drawingArea.setStyleSheet(u"QFrame#drawingArea {\n"
-"	border: 2px solid black\n"
+"	border: 2px solid black;\n"
+"	background-color: white\n"
 "}")
-        self.drawingArea.setFrameShape(QFrame.Shape.StyledPanel)
-        self.drawingArea.setFrameShadow(QFrame.Shadow.Raised)
-        self.label_2 = QLabel(self.drawingArea)
-        self.label_2.setObjectName(u"label_2")
-        self.label_2.setGeometry(QRect(120, 40, 71, 31))
+        self.drawingArea.setFrameShape(QFrame.Shape.NoFrame)
+        self.gridLayout_2 = QGridLayout(self.drawingArea)
+        self.gridLayout_2.setObjectName(u"gridLayout_2")
+        self.diagramLabel = QLabel(self.drawingArea)
+        self.diagramLabel.setObjectName(u"diagramLabel")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.diagramLabel.sizePolicy().hasHeightForWidth())
+        self.diagramLabel.setSizePolicy(sizePolicy1)
+
+        self.gridLayout_2.addWidget(self.diagramLabel, 0, 0, 1, 1)
+
 
         self.horizontalLayout.addWidget(self.drawingArea)
-
-        self.resultsArea = QWidget(self.centralwidget)
-        self.resultsArea.setObjectName(u"resultsArea")
-        self.resultsArea.setMaximumSize(QSize(400, 16777215))
-        self.resultsArea.setCursor(QCursor(Qt.CursorShape.ArrowCursor))
-        self.resultsArea.setStyleSheet(u"QWidget#resultsArea {\n"
-"	border: 2px solid black;\n"
-"	background-color: \"#f0ffe4\"\n"
-"}")
-        self.verticalLayout = QVBoxLayout(self.resultsArea)
-        self.verticalLayout.setObjectName(u"verticalLayout")
-        self.tabWidget_2 = QTabWidget(self.resultsArea)
-        self.tabWidget_2.setObjectName(u"tabWidget_2")
-        self.tabWidget_2.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.tabWidget_2.setStyleSheet(u"QWidget {\n"
-"	background-color: rgb(36, 88, 104);\n"
-"	color: white\n"
-"}")
-        self.tabWidget_2.setTabShape(QTabWidget.TabShape.Rounded)
-        self.tab_3 = QWidget()
-        self.tab_3.setObjectName(u"tab_3")
-        self.tab_3.setCursor(QCursor(Qt.CursorShape.ArrowCursor))
-        self.tabWidget_2.addTab(self.tab_3, "")
-        self.tab_4 = QWidget()
-        self.tab_4.setObjectName(u"tab_4")
-        self.tab_4.setCursor(QCursor(Qt.CursorShape.ArrowCursor))
-        self.tabWidget_2.addTab(self.tab_4, "")
-
-        self.verticalLayout.addWidget(self.tabWidget_2)
-
-
-        self.horizontalLayout.addWidget(self.resultsArea)
 
 
         self.verticalLayout_3.addLayout(self.horizontalLayout)
@@ -213,24 +181,148 @@ class Ui_MainWindow(object):
 "}")
         self.gridLayout_3 = QGridLayout(self.componentSelect)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
-        self.tabWidget = QTabWidget(self.componentSelect)
-        self.tabWidget.setObjectName(u"tabWidget")
-        self.tabWidget.setMinimumSize(QSize(0, 160))
-        self.tabWidget.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.tabWidget.setStyleSheet(u"QWidget {\n"
-"	background-color: rgb(36, 88, 104);\n"
-"	color: white\n"
+        self.widget = QWidget(self.componentSelect)
+        self.widget.setObjectName(u"widget")
+        self.widget.setStyleSheet(u"QWidget {\n"
+"	color: white;\n"
+"	background-color: rgb(36, 88, 104)\n"
 "}")
-        self.tabWidget.setTabShape(QTabWidget.TabShape.Rounded)
-        self.tab = QWidget()
-        self.tab.setObjectName(u"tab")
-        self.tab.setCursor(QCursor(Qt.CursorShape.ArrowCursor))
-        self.tabWidget.addTab(self.tab, "")
-        self.tab_2 = QWidget()
-        self.tab_2.setObjectName(u"tab_2")
-        self.tabWidget.addTab(self.tab_2, "")
+        self.horizontalLayoutWidget = QWidget(self.widget)
+        self.horizontalLayoutWidget.setObjectName(u"horizontalLayoutWidget")
+        self.horizontalLayoutWidget.setGeometry(QRect(20, 10, 1238, 161))
+        self.horizontalLayout_4 = QHBoxLayout(self.horizontalLayoutWidget)
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.addSingleLinkBtn = QPushButton(self.horizontalLayoutWidget)
+        self.addSingleLinkBtn.setObjectName(u"addSingleLinkBtn")
+        self.addSingleLinkBtn.setMinimumSize(QSize(200, 150))
+        self.addSingleLinkBtn.setFont(font2)
+        self.addSingleLinkBtn.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.addSingleLinkBtn.setStyleSheet(u"QPushButton {\n"
+"	background-color: white;\n"
+"	color: black;\n"
+"	border-radius: 1px;\n"
+"	border: 4px solid rgb(121, 121, 121);	\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(207, 207, 207)\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: rgb(121, 121, 121)\n"
+"}")
 
-        self.gridLayout_3.addWidget(self.tabWidget, 0, 0, 1, 1)
+        self.horizontalLayout_4.addWidget(self.addSingleLinkBtn)
+
+        self.pushButton = QPushButton(self.horizontalLayoutWidget)
+        self.pushButton.setObjectName(u"pushButton")
+        self.pushButton.setMinimumSize(QSize(200, 150))
+        self.pushButton.setMaximumSize(QSize(50, 16777215))
+        self.pushButton.setFont(font2)
+        self.pushButton.setStyleSheet(u"QPushButton {\n"
+"	background-color: white;\n"
+"	color: black;\n"
+"	border-radius: 1px;\n"
+"	border: 4px solid rgb(121, 121, 121);	\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(207, 207, 207)\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: rgb(121, 121, 121)\n"
+"}")
+
+        self.horizontalLayout_4.addWidget(self.pushButton)
+
+        self.addRepChainBtn = QPushButton(self.horizontalLayoutWidget)
+        self.addRepChainBtn.setObjectName(u"addRepChainBtn")
+        self.addRepChainBtn.setMinimumSize(QSize(200, 150))
+        self.addRepChainBtn.setFont(font2)
+        self.addRepChainBtn.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.addRepChainBtn.setStyleSheet(u"QPushButton {\n"
+"	background-color: white;\n"
+"	color: black;\n"
+"	border-radius: 1px;\n"
+"	border: 4px solid rgb(121, 121, 121);	\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(207, 207, 207)\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: rgb(121, 121, 121)\n"
+"}")
+
+        self.horizontalLayout_4.addWidget(self.addRepChainBtn)
+
+        self.addTrustNodeBtn = QPushButton(self.horizontalLayoutWidget)
+        self.addTrustNodeBtn.setObjectName(u"addTrustNodeBtn")
+        self.addTrustNodeBtn.setMinimumSize(QSize(200, 150))
+        self.addTrustNodeBtn.setFont(font2)
+        self.addTrustNodeBtn.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.addTrustNodeBtn.setStyleSheet(u"QPushButton {\n"
+"	background-color: white;\n"
+"	color: black;\n"
+"	border-radius: 1px;\n"
+"	border: 4px solid rgb(121, 121, 121);	\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(207, 207, 207)\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: rgb(121, 121, 121)\n"
+"}")
+
+        self.horizontalLayout_4.addWidget(self.addTrustNodeBtn)
+
+        self.pushButton_2 = QPushButton(self.horizontalLayoutWidget)
+        self.pushButton_2.setObjectName(u"pushButton_2")
+        self.pushButton_2.setMinimumSize(QSize(200, 150))
+        self.pushButton_2.setFont(font2)
+        self.pushButton_2.setStyleSheet(u"QPushButton {\n"
+"	background-color: white;\n"
+"	color: black;\n"
+"	border-radius: 1px;\n"
+"	border: 4px solid rgb(121, 121, 121);	\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(207, 207, 207)\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: rgb(121, 121, 121)\n"
+"}")
+
+        self.horizontalLayout_4.addWidget(self.pushButton_2)
+
+        self.pushButton_3 = QPushButton(self.horizontalLayoutWidget)
+        self.pushButton_3.setObjectName(u"pushButton_3")
+        self.pushButton_3.setMinimumSize(QSize(200, 150))
+        self.pushButton_3.setFont(font2)
+        self.pushButton_3.setStyleSheet(u"QPushButton {\n"
+"	background-color: white;\n"
+"	color: black;\n"
+"	border-radius: 1px;\n"
+"	border: 4px solid rgb(121, 121, 121);	\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(207, 207, 207)\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: rgb(121, 121, 121)\n"
+"}")
+
+        self.horizontalLayout_4.addWidget(self.pushButton_3)
+
+        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_4.addItem(self.horizontalSpacer_3)
+
+
+        self.gridLayout_3.addWidget(self.widget, 0, 0, 1, 1)
 
 
         self.verticalLayout_3.addWidget(self.componentSelect)
@@ -246,6 +338,7 @@ class Ui_MainWindow(object):
         self.toolBar = QWidget(self.centralwidget)
         self.toolBar.setObjectName(u"toolBar")
         self.toolBar.setMaximumSize(QSize(16777215, 70))
+        self.toolBar.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.toolBar.setStyleSheet(u".QPushButton {\n"
 "	background-color: rgb(255, 255, 255);\n"
 "	border-color: \"#000000\";\n"
@@ -258,14 +351,30 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
         self.newBtn = QPushButton(self.toolBar)
         self.newBtn.setObjectName(u"newBtn")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.newBtn.sizePolicy().hasHeightForWidth())
-        self.newBtn.setSizePolicy(sizePolicy1)
+        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.newBtn.sizePolicy().hasHeightForWidth())
+        self.newBtn.setSizePolicy(sizePolicy2)
         self.newBtn.setMinimumSize(QSize(50, 50))
-        self.newBtn.setMaximumSize(QSize(50, 16777215))
+        self.newBtn.setMaximumSize(QSize(50, 50))
+        font3 = QFont()
+        font3.setFamilies([u"Roboto Medium"])
+        self.newBtn.setFont(font3)
         self.newBtn.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.newBtn.setStyleSheet(u"QPushButton {\n"
+"	background-color: white;\n"
+"	color: black;\n"
+"	border-radius: 1px;\n"
+"	border: 2px solid rgb(121, 121, 121);	\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(207, 207, 207)\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: rgb(121, 121, 121)\n"
+"}")
 
         self.horizontalLayout_3.addWidget(self.newBtn)
 
@@ -273,14 +382,43 @@ class Ui_MainWindow(object):
         self.saveBtn.setObjectName(u"saveBtn")
         self.saveBtn.setMinimumSize(QSize(50, 50))
         self.saveBtn.setMaximumSize(QSize(50, 50))
+        self.saveBtn.setFont(font3)
         self.saveBtn.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.saveBtn.setStyleSheet(u"QPushButton {\n"
+"	background-color: white;\n"
+"	color: black;\n"
+"	border-radius: 1px;\n"
+"	border: 2px solid rgb(121, 121, 121);	\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(207, 207, 207)\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: rgb(121, 121, 121)\n"
+"}")
 
         self.horizontalLayout_3.addWidget(self.saveBtn)
 
         self.runBtn = QPushButton(self.toolBar)
         self.runBtn.setObjectName(u"runBtn")
+        self.runBtn.setMinimumSize(QSize(50, 50))
         self.runBtn.setMaximumSize(QSize(50, 50))
+        self.runBtn.setFont(font3)
         self.runBtn.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.runBtn.setStyleSheet(u"QPushButton {\n"
+"	background-color: white;\n"
+"	color: black;\n"
+"	border-radius: 1px;\n"
+"	border: 2px solid rgb(121, 121, 121);	\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(207, 207, 207)\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: rgb(121, 121, 121)\n"
+"}")
 
         self.horizontalLayout_3.addWidget(self.runBtn)
 
@@ -288,18 +426,69 @@ class Ui_MainWindow(object):
         self.stopBtn.setObjectName(u"stopBtn")
         self.stopBtn.setMinimumSize(QSize(50, 50))
         self.stopBtn.setMaximumSize(QSize(50, 50))
+        self.stopBtn.setFont(font3)
         self.stopBtn.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.stopBtn.setStyleSheet(u"QPushButton {\n"
+"	background-color: white;\n"
+"	color: black;\n"
+"	border-radius: 1px;\n"
+"	border: 2px solid rgb(121, 121, 121);	\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(207, 207, 207)\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: rgb(121, 121, 121)\n"
+"}")
 
         self.horizontalLayout_3.addWidget(self.stopBtn)
 
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.closeBtn = QPushButton(self.toolBar)
+        self.closeBtn.setObjectName(u"closeBtn")
+        self.closeBtn.setMinimumSize(QSize(50, 50))
+        self.closeBtn.setMaximumSize(QSize(50, 50))
+        self.closeBtn.setFont(font3)
+        self.closeBtn.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.closeBtn.setStyleSheet(u"QPushButton {\n"
+"	background-color: white;\n"
+"	color: black;\n"
+"	border-radius: 1px;\n"
+"	border: 2px solid rgb(121, 121, 121);	\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(207, 207, 207)\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: rgb(121, 121, 121)\n"
+"}")
 
-        self.horizontalLayout_3.addItem(self.horizontalSpacer)
+        self.horizontalLayout_3.addWidget(self.closeBtn)
+
+        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_3.addItem(self.horizontalSpacer_2)
 
         self.exitBtn = QPushButton(self.toolBar)
         self.exitBtn.setObjectName(u"exitBtn")
+        self.exitBtn.setMinimumSize(QSize(50, 50))
         self.exitBtn.setMaximumSize(QSize(50, 50))
+        self.exitBtn.setFont(font3)
         self.exitBtn.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.exitBtn.setStyleSheet(u"QPushButton {\n"
+"	background-color: white;\n"
+"	color: black;\n"
+"	border-radius: 1px;\n"
+"	border: 2px solid rgb(121, 121, 121);	\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(207, 207, 207)\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"	background-color: rgb(121, 121, 121)\n"
+"}")
 
         self.horizontalLayout_3.addWidget(self.exitBtn)
 
@@ -313,10 +502,10 @@ class Ui_MainWindow(object):
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
         self.menubar.setGeometry(QRect(0, 0, 1920, 21))
-        font3 = QFont()
-        font3.setFamilies([u"Segoe UI"])
-        font3.setBold(False)
-        self.menubar.setFont(font3)
+        font4 = QFont()
+        font4.setFamilies([u"Segoe UI"])
+        font4.setBold(False)
+        self.menubar.setFont(font4)
         self.menubar.setCursor(QCursor(Qt.CursorShape.ArrowCursor))
         self.menubar.setDefaultUp(False)
         self.menuFile = QMenu(self.menubar)
@@ -342,55 +531,39 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget_2.setCurrentIndex(1)
-        self.tabWidget.setCurrentIndex(0)
-
-
         QMetaObject.connectSlotsByName(MainWindow)
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Simulaysh", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"QUANTA", None))
         self.actionNew.setText(QCoreApplication.translate("MainWindow", u"New", None))
         self.actionSave.setText(QCoreApplication.translate("MainWindow", u"Save", None))
         self.actionetc.setText(QCoreApplication.translate("MainWindow", u"etc", None))
         self.actionExit.setText(QCoreApplication.translate("MainWindow", u"Exit", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"Component params", None))
-        ___qtreewidgetitem = self.treeWidget.headerItem()
-        ___qtreewidgetitem.setText(0, QCoreApplication.translate("MainWindow", u"Network", None));
-
-        __sortingEnabled = self.treeWidget.isSortingEnabled()
-        self.treeWidget.setSortingEnabled(False)
-        ___qtreewidgetitem1 = self.treeWidget.topLevelItem(0)
-        ___qtreewidgetitem1.setText(0, QCoreApplication.translate("MainWindow", u"test", None));
-        ___qtreewidgetitem2 = ___qtreewidgetitem1.child(0)
-        ___qtreewidgetitem2.setText(0, QCoreApplication.translate("MainWindow", u"sub", None));
-        ___qtreewidgetitem3 = self.treeWidget.topLevelItem(1)
-        ___qtreewidgetitem3.setText(0, QCoreApplication.translate("MainWindow", u"test2", None));
-        ___qtreewidgetitem4 = ___qtreewidgetitem3.child(0)
-        ___qtreewidgetitem4.setText(0, QCoreApplication.translate("MainWindow", u"sub2", None));
-        ___qtreewidgetitem5 = self.treeWidget.topLevelItem(2)
-        ___qtreewidgetitem5.setText(0, QCoreApplication.translate("MainWindow", u"test3", None));
-        ___qtreewidgetitem6 = ___qtreewidgetitem5.child(0)
-        ___qtreewidgetitem6.setText(0, QCoreApplication.translate("MainWindow", u"sub3", None));
-        ___qtreewidgetitem7 = ___qtreewidgetitem6.child(0)
-        ___qtreewidgetitem7.setText(0, QCoreApplication.translate("MainWindow", u"subsub3", None));
-        self.treeWidget.setSortingEnabled(__sortingEnabled)
-
-        self.label_5.setText(QCoreApplication.translate("MainWindow", u"(Selected component)", None))
-        ___qtablewidgetitem = self.tableWidget.horizontalHeaderItem(0)
-        ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"param", None));
-        ___qtablewidgetitem1 = self.tableWidget.horizontalHeaderItem(1)
-        ___qtablewidgetitem1.setText(QCoreApplication.translate("MainWindow", u"value", None));
-        self.label_2.setText(QCoreApplication.translate("MainWindow", u"Drawing area", None))
-        self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_3), QCoreApplication.translate("MainWindow", u"Results", None))
-        self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_4), QCoreApplication.translate("MainWindow", u"Sweeps", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("MainWindow", u"Components", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("MainWindow", u"Presets", None))
+        ___qtreewidgetitem = self.componentTree.headerItem()
+        ___qtreewidgetitem.setText(0, QCoreApplication.translate("MainWindow", u"Components", None));
+        self.selectedComponentLabel.setText("")
+        ___qtablewidgetitem = self.paramTable.horizontalHeaderItem(0)
+        ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"Parameter", None));
+        ___qtablewidgetitem1 = self.paramTable.horizontalHeaderItem(1)
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("MainWindow", u"Value", None));
+        self.diagramLabel.setText("")
+        self.addSingleLinkBtn.setText(QCoreApplication.translate("MainWindow", u"Single Link \n"
+"(Midpoint source)", None))
+        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"Single Link \n"
+"(Source at sender)", None))
+        self.addRepChainBtn.setText(QCoreApplication.translate("MainWindow", u"Repeater Chain", None))
+        self.addTrustNodeBtn.setText(QCoreApplication.translate("MainWindow", u"Trusted Node Chain", None))
+        self.pushButton_2.setText(QCoreApplication.translate("MainWindow", u"Entanglement\n"
+"Purification", None))
+        self.pushButton_3.setText(QCoreApplication.translate("MainWindow", u"QKD Performance\n"
+"Analysis", None))
         self.newBtn.setText(QCoreApplication.translate("MainWindow", u"New", None))
         self.saveBtn.setText(QCoreApplication.translate("MainWindow", u"Save", None))
         self.runBtn.setText(QCoreApplication.translate("MainWindow", u"Run", None))
         self.stopBtn.setText(QCoreApplication.translate("MainWindow", u"Stop", None))
+        self.closeBtn.setText(QCoreApplication.translate("MainWindow", u"Close", None))
         self.exitBtn.setText(QCoreApplication.translate("MainWindow", u"Exit", None))
         self.menuFile.setTitle(QCoreApplication.translate("MainWindow", u"File", None))
         self.menuEdit.setTitle(QCoreApplication.translate("MainWindow", u"Edit", None))
