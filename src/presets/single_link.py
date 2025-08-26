@@ -65,6 +65,7 @@ class SingleLink:
         b_e += self.prob_dc_per_freq_per_bin_det_1 * self.prob_dc_per_freq_per_bin_det_2 * (1 - P_true_click_1) * (1 - P_true_click_2)
         
         fid = true_a / (a_e + b_e)
+
         return a_e + b_e, self.source_rep_rate * (a_e + b_e), fid
     
     def run_pnr(self):
@@ -122,3 +123,21 @@ class SingleLink:
 
 
         return P_all_dets, self.source_rep_rate * P_all_dets, fidelity
+
+if __name__ == '__main__':
+    length = np.linspace(0, 700, 100)
+    fidelity = []
+    for i in range(100):
+        single_link = SingleLink(l=length[i], mu=0.1, alpha=0.2, det_1_eff=0.9, det_2_eff=0.9,
+        prob_dc_per_freq_per_bin_det_1=3E-5, prob_dc_per_freq_per_bin_det_2=3E-5,
+        verbose=False, detector_type='non_PNR', source_rep_rate=51, arch='midpoint')
+        a_e_plus_b_e, source_rep_rate_times_a_e_plus_b_e, fid = single_link.run()
+        print(fid)
+        fidelity.append(fid)
+
+    plt.figure(figsize=(10, 5))
+    plt.plot(length, fidelity, label='1', color='blue')
+    # print(ind_vars[self.app_ref.SL_indVar], dep_vars[self.app_ref.SL_depVar])
+    # plt.xlabel(self.ind_var_name)
+    # plt.ylabel(self.dep_var_name)
+    plt.show()

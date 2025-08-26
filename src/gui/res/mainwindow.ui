@@ -34,7 +34,7 @@
    <bool>false</bool>
   </property>
   <property name="windowTitle">
-   <string>Simulaysh</string>
+   <string>QUANTA</string>
   </property>
   <property name="autoFillBackground">
    <bool>false</bool>
@@ -71,6 +71,12 @@ QStatusBar {
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
          <widget class="QWidget" name="paramSelect" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>600</width>
+            <height>0</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
             <width>300</width>
@@ -94,8 +100,8 @@ QWidget {
             <widget class="QLabel" name="label">
              <property name="font">
               <font>
-               <family>Verdana</family>
-               <pointsize>12</pointsize>
+               <family>Roboto Medium</family>
+               <pointsize>14</pointsize>
               </font>
              </property>
              <property name="styleSheet">
@@ -110,8 +116,8 @@ QWidget {
             <widget class="QTreeWidget" name="componentTree">
              <property name="font">
               <font>
-               <family>Verdana</family>
-               <pointsize>10</pointsize>
+               <family>Roboto Medium</family>
+               <pointsize>12</pointsize>
               </font>
              </property>
              <property name="cursor" stdset="0">
@@ -132,37 +138,48 @@ QWidget {
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="label_5">
+            <widget class="QLabel" name="selectedComponentLabel">
              <property name="font">
               <font>
-               <family>Verdana</family>
-               <pointsize>12</pointsize>
+               <family>Roboto Medium</family>
+               <pointsize>14</pointsize>
               </font>
              </property>
              <property name="text">
-              <string>(Selected component)</string>
+              <string/>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QTableWidget" name="tableWidget">
+            <widget class="QTableWidget" name="paramTable">
+             <property name="minimumSize">
+              <size>
+               <width>500</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>Roboto Medium</family>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
              <property name="styleSheet">
               <string notr="true">QTableWidget {
-	color: black;
-	background-color: rgb(36, 88, 104)
-}
-QWidget#tableWidget {
+	color: white;
+	background-color: rgb(36, 88, 104);
 	border: 2px solid black
-}</string>
+}
+</string>
              </property>
              <column>
               <property name="text">
-               <string>param</string>
+               <string>Parameter</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>value</string>
+               <string>Value</string>
               </property>
              </column>
             </widget>
@@ -174,7 +191,8 @@ QWidget#tableWidget {
          <widget class="QFrame" name="drawingArea">
           <property name="styleSheet">
            <string notr="true">QFrame#drawingArea {
-	border: 2px solid black
+	border: 2px solid black;
+	background-color: white
 }</string>
           </property>
           <property name="frameShape">
@@ -182,76 +200,16 @@ QWidget#tableWidget {
           </property>
           <layout class="QGridLayout" name="gridLayout_2">
            <item row="0" column="0">
-            <widget class="QLabel" name="label_2">
+            <widget class="QLabel" name="diagramLabel">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="text">
-              <string>Drawing area</string>
+              <string/>
              </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QGraphicsView" name="graphicsView">
-             <property name="styleSheet">
-              <string notr="true">QWidget {
-	border: 2px solid black;
-	background-color: &quot;#f0ffe4&quot;
-}</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item>
-         <widget class="QWidget" name="resultsArea" native="true">
-          <property name="maximumSize">
-           <size>
-            <width>400</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="cursor">
-           <cursorShape>ArrowCursor</cursorShape>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QWidget#resultsArea {
-	border: 2px solid black;
-	background-color: &quot;#f0ffe4&quot;
-}</string>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout">
-           <item>
-            <widget class="QTabWidget" name="tabWidget_2">
-             <property name="cursor">
-              <cursorShape>PointingHandCursor</cursorShape>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QWidget {
-	background-color: rgb(36, 88, 104);
-	color: white
-}</string>
-             </property>
-             <property name="tabShape">
-              <enum>QTabWidget::TabShape::Rounded</enum>
-             </property>
-             <property name="currentIndex">
-              <number>1</number>
-             </property>
-             <widget class="QWidget" name="tab_3">
-              <property name="cursor">
-               <cursorShape>ArrowCursor</cursorShape>
-              </property>
-              <attribute name="title">
-               <string>Results</string>
-              </attribute>
-             </widget>
-             <widget class="QWidget" name="tab_4">
-              <property name="cursor">
-               <cursorShape>ArrowCursor</cursorShape>
-              </property>
-              <attribute name="title">
-               <string>Sweeps</string>
-              </attribute>
-             </widget>
             </widget>
            </item>
           </layout>
@@ -281,134 +239,260 @@ QWidget#tableWidget {
         </property>
         <layout class="QGridLayout" name="gridLayout_3">
          <item row="0" column="0">
-          <widget class="QTabWidget" name="tabWidget">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>160</height>
-            </size>
-           </property>
-           <property name="cursor">
-            <cursorShape>PointingHandCursor</cursorShape>
-           </property>
+          <widget class="QWidget" name="widget" native="true">
            <property name="styleSheet">
             <string notr="true">QWidget {
-	background-color: rgb(36, 88, 104);
-	color: white
+	color: white;
+	background-color: rgb(36, 88, 104)
 }</string>
            </property>
-           <property name="tabShape">
-            <enum>QTabWidget::TabShape::Rounded</enum>
-           </property>
-           <property name="currentIndex">
-            <number>1</number>
-           </property>
-           <widget class="QWidget" name="tab">
-            <property name="cursor">
-             <cursorShape>ArrowCursor</cursorShape>
+           <widget class="QWidget" name="horizontalLayoutWidget">
+            <property name="geometry">
+             <rect>
+              <x>20</x>
+              <y>10</y>
+              <width>1238</width>
+              <height>161</height>
+             </rect>
             </property>
-            <attribute name="title">
-             <string>Components</string>
-            </attribute>
-            <widget class="QWidget" name="horizontalLayoutWidget">
-             <property name="geometry">
-              <rect>
-               <x>10</x>
-               <y>20</y>
-               <width>400</width>
-               <height>102</height>
-              </rect>
-             </property>
-             <layout class="QHBoxLayout" name="horizontalLayout_2">
-              <item>
-               <widget class="QWidget" name="widget" native="true">
-                <property name="maximumSize">
-                 <size>
-                  <width>100</width>
-                  <height>100</height>
-                 </size>
-                </property>
-                <layout class="QVBoxLayout" name="verticalLayout_2">
-                 <item>
-                  <widget class="QLabel" name="label_3">
-                   <property name="text">
-                    <string/>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="label_4">
-                   <property name="text">
-                    <string>Source</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="addSourceBtn">
-                <property name="cursor">
-                 <cursorShape>PointingHandCursor</cursorShape>
-                </property>
-                <property name="text">
-                 <string>Source</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="addDetectorBtn">
-                <property name="cursor">
-                 <cursorShape>PointingHandCursor</cursorShape>
-                </property>
-                <property name="text">
-                 <string>Detector</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="addFibreBtn">
-                <property name="cursor">
-                 <cursorShape>PointingHandCursor</cursorShape>
-                </property>
-                <property name="text">
-                 <string>Fibre</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </widget>
-           <widget class="QWidget" name="tab_2">
-            <attribute name="title">
-             <string>Presets</string>
-            </attribute>
-            <widget class="QWidget" name="horizontalLayoutWidget_2">
-             <property name="geometry">
-              <rect>
-               <x>30</x>
-               <y>20</y>
-               <width>401</width>
-               <height>101</height>
-              </rect>
-             </property>
-             <layout class="QHBoxLayout" name="horizontalLayout_4">
-              <item>
-               <widget class="QPushButton" name="addSingleLinkBtn">
-                <property name="text">
-                 <string>Single Link</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="pushButton_2">
-                <property name="text">
-                 <string>PushButton</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
+            <layout class="QHBoxLayout" name="horizontalLayout_4">
+             <item>
+              <widget class="QPushButton" name="addSingleLinkBtn">
+               <property name="minimumSize">
+                <size>
+                 <width>200</width>
+                 <height>150</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Roboto Medium</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton {
+	background-color: white;
+	color: black;
+	border-radius: 1px;
+	border: 4px solid rgb(121, 121, 121);	
+}
+QPushButton:hover {
+	background-color: rgb(207, 207, 207)
+}
+
+QPushButton:pressed {
+	background-color: rgb(121, 121, 121)
+}</string>
+               </property>
+               <property name="text">
+                <string>Single Link 
+(Midpoint source)</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton">
+               <property name="minimumSize">
+                <size>
+                 <width>200</width>
+                 <height>150</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>50</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Roboto Medium</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton {
+	background-color: white;
+	color: black;
+	border-radius: 1px;
+	border: 4px solid rgb(121, 121, 121);	
+}
+QPushButton:hover {
+	background-color: rgb(207, 207, 207)
+}
+
+QPushButton:pressed {
+	background-color: rgb(121, 121, 121)
+}</string>
+               </property>
+               <property name="text">
+                <string>Single Link 
+(Source at sender)</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="addRepChainBtn">
+               <property name="minimumSize">
+                <size>
+                 <width>200</width>
+                 <height>150</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Roboto Medium</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton {
+	background-color: white;
+	color: black;
+	border-radius: 1px;
+	border: 4px solid rgb(121, 121, 121);	
+}
+QPushButton:hover {
+	background-color: rgb(207, 207, 207)
+}
+
+QPushButton:pressed {
+	background-color: rgb(121, 121, 121)
+}</string>
+               </property>
+               <property name="text">
+                <string>Repeater Chain</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="addTrustNodeBtn">
+               <property name="minimumSize">
+                <size>
+                 <width>200</width>
+                 <height>150</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Roboto Medium</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton {
+	background-color: white;
+	color: black;
+	border-radius: 1px;
+	border: 4px solid rgb(121, 121, 121);	
+}
+QPushButton:hover {
+	background-color: rgb(207, 207, 207)
+}
+
+QPushButton:pressed {
+	background-color: rgb(121, 121, 121)
+}</string>
+               </property>
+               <property name="text">
+                <string>Trusted Node Chain</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_2">
+               <property name="minimumSize">
+                <size>
+                 <width>200</width>
+                 <height>150</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Roboto Medium</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton {
+	background-color: white;
+	color: black;
+	border-radius: 1px;
+	border: 4px solid rgb(121, 121, 121);	
+}
+QPushButton:hover {
+	background-color: rgb(207, 207, 207)
+}
+
+QPushButton:pressed {
+	background-color: rgb(121, 121, 121)
+}</string>
+               </property>
+               <property name="text">
+                <string>Entanglement
+Purification</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_3">
+               <property name="minimumSize">
+                <size>
+                 <width>200</width>
+                 <height>150</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Roboto Medium</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton {
+	background-color: white;
+	color: black;
+	border-radius: 1px;
+	border: 4px solid rgb(121, 121, 121);	
+}
+QPushButton:hover {
+	background-color: rgb(207, 207, 207)
+}
+
+QPushButton:pressed {
+	background-color: rgb(121, 121, 121)
+}</string>
+               </property>
+               <property name="text">
+                <string>QKD Performance
+Analysis</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_3">
+               <property name="orientation">
+                <enum>Qt::Orientation::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
            </widget>
           </widget>
          </item>
@@ -435,6 +519,9 @@ QWidget#tableWidget {
           <width>16777215</width>
           <height>70</height>
          </size>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
         </property>
         <property name="styleSheet">
          <string notr="true">.QPushButton {
@@ -464,11 +551,31 @@ QWidget{
            <property name="maximumSize">
             <size>
              <width>50</width>
-             <height>16777215</height>
+             <height>50</height>
             </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Roboto Medium</family>
+            </font>
            </property>
            <property name="cursor">
             <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+	background-color: white;
+	color: black;
+	border-radius: 1px;
+	border: 2px solid rgb(121, 121, 121);	
+}
+QPushButton:hover {
+	background-color: rgb(207, 207, 207)
+}
+
+QPushButton:pressed {
+	background-color: rgb(121, 121, 121)
+}</string>
            </property>
            <property name="text">
             <string>New</string>
@@ -489,8 +596,28 @@ QWidget{
              <height>50</height>
             </size>
            </property>
+           <property name="font">
+            <font>
+             <family>Roboto Medium</family>
+            </font>
+           </property>
            <property name="cursor">
             <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+	background-color: white;
+	color: black;
+	border-radius: 1px;
+	border: 2px solid rgb(121, 121, 121);	
+}
+QPushButton:hover {
+	background-color: rgb(207, 207, 207)
+}
+
+QPushButton:pressed {
+	background-color: rgb(121, 121, 121)
+}</string>
            </property>
            <property name="text">
             <string>Save</string>
@@ -499,14 +626,40 @@ QWidget{
          </item>
          <item>
           <widget class="QPushButton" name="runBtn">
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>50</height>
+            </size>
+           </property>
            <property name="maximumSize">
             <size>
              <width>50</width>
              <height>50</height>
             </size>
            </property>
+           <property name="font">
+            <font>
+             <family>Roboto Medium</family>
+            </font>
+           </property>
            <property name="cursor">
             <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+	background-color: white;
+	color: black;
+	border-radius: 1px;
+	border: 2px solid rgb(121, 121, 121);	
+}
+QPushButton:hover {
+	background-color: rgb(207, 207, 207)
+}
+
+QPushButton:pressed {
+	background-color: rgb(121, 121, 121)
+}</string>
            </property>
            <property name="text">
             <string>Run</string>
@@ -527,8 +680,28 @@ QWidget{
              <height>50</height>
             </size>
            </property>
+           <property name="font">
+            <font>
+             <family>Roboto Medium</family>
+            </font>
+           </property>
            <property name="cursor">
             <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+	background-color: white;
+	color: black;
+	border-radius: 1px;
+	border: 2px solid rgb(121, 121, 121);	
+}
+QPushButton:hover {
+	background-color: rgb(207, 207, 207)
+}
+
+QPushButton:pressed {
+	background-color: rgb(121, 121, 121)
+}</string>
            </property>
            <property name="text">
             <string>Stop</string>
@@ -536,51 +709,51 @@ QWidget{
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="exitBtn">
+          <widget class="QPushButton" name="closeBtn">
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>50</height>
+            </size>
+           </property>
            <property name="maximumSize">
             <size>
              <width>50</width>
              <height>50</height>
             </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Roboto Medium</family>
+            </font>
            </property>
            <property name="cursor">
             <cursorShape>PointingHandCursor</cursorShape>
            </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+	background-color: white;
+	color: black;
+	border-radius: 1px;
+	border: 2px solid rgb(121, 121, 121);	
+}
+QPushButton:hover {
+	background-color: rgb(207, 207, 207)
+}
+
+QPushButton:pressed {
+	background-color: rgb(121, 121, 121)
+}</string>
+           </property>
            <property name="text">
-            <string>Exit</string>
+            <string>Close</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="showBtn">
-           <property name="maximumSize">
-            <size>
-             <width>50</width>
-             <height>50</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Show</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="printNetBtn">
-           <property name="maximumSize">
-            <size>
-             <width>50</width>
-             <height>50</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Print</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer">
+          <spacer name="horizontalSpacer_2">
            <property name="orientation">
-            <enum>Qt::Orientation::Vertical</enum>
+            <enum>Qt::Orientation::Horizontal</enum>
            </property>
            <property name="sizeHint" stdset="0">
             <size>
@@ -589,6 +762,48 @@ QWidget{
             </size>
            </property>
           </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="exitBtn">
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>50</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Roboto Medium</family>
+            </font>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+	background-color: white;
+	color: black;
+	border-radius: 1px;
+	border: 2px solid rgb(121, 121, 121);	
+}
+QPushButton:hover {
+	background-color: rgb(207, 207, 207)
+}
+
+QPushButton:pressed {
+	background-color: rgb(121, 121, 121)
+}</string>
+           </property>
+           <property name="text">
+            <string>Exit</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>
