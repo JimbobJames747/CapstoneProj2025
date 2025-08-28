@@ -1,74 +1,66 @@
+from RbVapourEIT import RbVapourEIT
+from RbVapourRaman import RbVapourRaman  
+from PrGEM import PrGEM
 from EuCrystalAFC import EuCrystalAFC
+from ErCrystalAFC import ErCrystalAFC
+from parameters import *
+
 
 def main():
-    print("\n--- Valid Eu:YSO AFC (Short Storage) ---")
-    try: 
-        eu_short = EuCrystalAFC(
-            name="EuAFC_Short",
-            in_wavelength=580e-9,
-            in_storage_time=10e-6,  # less than 12e-6
-            in_fidelity=0.85,
-            long_storage=False,
-            verbose=True
-        )
-        eu_short.summary
-        print(f"Retrieved Fidelity: {eu_short.retrieved_fidelity()}")
-        print(f"Retrieved Efficiency: {eu_short.retrieved_efficiency()}")
-    except Exception as e:
-        print("Error:", e)
+    # Rb EIT (qfcd enabled)
+    rb_eit = RbVapourEIT(
+        name="RbEIT",
+        in_wavelength=VAPOUR_EIT_MEMORY_WAVELENGTH,
+        in_storage_time=VAPOUR_EIT_MEMORY_STORAGE_TIME,  # match spec
+        in_fidelity=0.95,
+        qfcd=True,
+        verbose=True,
+    )
+    rb_eit.summary  # prints
 
-    print("\n--- Valid Eu:YSO AFC (Long Storage) ---")
-    try:
-        eu_long = EuCrystalAFC(
-            name="EuAFC_Long",
-            in_wavelength=570e-9,
-            in_storage_time=3000,  # less than 3600s
-            in_fidelity=0.95,
-            long_storage=True,
-            verbose=True
-        )
-        eu_long.summary
-        print(f"Retrieved Fidelity: {eu_long.retrieved_fidelity()}")
-        print(f"Retrieved Efficiency: {eu_long.retrieved_efficiency()}")
-    except Exception as e:
-        print("Error:", e)
+    # Rb Raman (qfcd enabled)
+    rb_raman = RbVapourRaman(
+        name="RbRaman",
+        in_wavelength=VAPOUR_RAMAN_MEMORY_WAVELENGTH,
+        in_storage_time=VAPOUR_RAMAN_MEMORY_STORAGE_TIME / 2,  # safely <= spec
+        in_fidelity=0.96,
+        qfcd=True,
+        verbose=True,
+    )
+    rb_raman.summary  # prints
 
-    print("\n--- Invalid: Negative Wavelength ---")
-    try:
-        EuCrystalAFC(
-            name="InvalidWavelength",
-            in_wavelength=-580e-9,
-            in_storage_time=1e-6,
-            in_fidelity=0.9,
-            long_storage=False
-        )
-    except Exception as e:
-        print(e)
+    # Pr GEM (qfcd enabled)
+    pr_gem = PrGEM(
+        name="PrGEM",
+        in_wavelength=PR_GEM_MEMORY_WAVELENGTH,
+        in_storage_time=PR_GEM_MEMORY_STORAGE_TIME / 2,
+        in_fidelity=0.97,
+        qfcd=True,
+        verbose=True,
+    )
+    pr_gem.summary  # prints
 
-    print("\n--- Invalid: Fidelity > 1 ---")
-    try:
-        EuCrystalAFC(
-            name="InvalidFidelity",
-            in_wavelength=580e-9,
-            in_storage_time=1e-6,
-            in_fidelity=1.2,
-            long_storage=False
-        )
-    except Exception as e:
-        print(e)
+    # Eu:YSO AFC (short-storage variant, qfcd enabled)
+    eu_afc = EuCrystalAFC(
+        name="EuAFC",
+        in_wavelength=EU_AFC_MEMORY_WAVELENGTH,
+        in_storage_time=min(10e-6, EU_SHORT_AFC_MEMORY_STORAGE_TIME),
+        in_fidelity=0.90,
+        long_storage=False,
+        qfcd=True,
+        verbose=True,
+    )
+    eu_afc.summary  # prints
 
-    print("\n--- Warning: Storage Time Exceeds Limit ---")
-    try:
-        eu_warn = EuCrystalAFC(
-            name="TooLongStorage",
-            in_wavelength=580e-9,
-            in_storage_time=4000,  # exceeds long limit of 3600s
-            in_fidelity=0.9,
-            long_storage=True
-        )
-        eu_warn.summary
-    except Exception as e:
-        print("Error:", e)
+    # Er:YSO AFC
+    er_afc = ErCrystalAFC(
+        name="ErAFC",
+        in_wavelength=ER_AFC_MEMORY_WAVELENGTH,
+        in_storage_time=ER_AFC_MEMORY_STORAGE_TIME / 2,
+        in_fidelity=0.92,
+        verbose=True,
+    )
+    er_afc.summary  # prints
 
 
 if __name__ == "__main__":

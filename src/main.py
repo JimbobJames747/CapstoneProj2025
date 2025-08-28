@@ -16,5 +16,9 @@ higher level gui class that inherits component and does gui manipulation
 -create network class that holds all components and does the logic of the network
 -should source include switching or should it be external? - what kind of multiplexing?
 -related to above: bipartite entanglement source or multipartite (could get complicated)
-
+- quantum memory + entanglement
+    - from jake 
+        - class hierarchy
+        - repeater chain + quantum memory
+    -    single link quantum memory
 """

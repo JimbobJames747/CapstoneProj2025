@@ -53,50 +53,46 @@ def total_efficiency(T, C, Delta, gamma, gamma_sw=0.0, storage_time=0.0, storage
 
     return eta_total
 
-def main():
-    # Simulation config
-    C = 10                      # cooperativity
-    Delta_vals = [100, 1000]  # can be customized
-    gamma = 1.0
-    storage_decay = False
-    gamma_sw = 0.0
-    storage_time = 0.0
+# Simulation config
+C = 10                      # cooperativity
+Delta_vals = [100, 1000]  # can be customized
+gamma = 1.0
+storage_decay = True
+gamma_sw = 0.0
+storage_time = 1
 
-    TCgamma_vals = np.linspace(1, 100, 100)
+TCgamma_vals = np.linspace(1, 100, 10)
 
-    # Plot
-    plt.figure(figsize=(10, 6))
-    for Delta in Delta_vals:
-        eta_totals = []
-        delta_label = Delta
-        for TCgamma in TCgamma_vals:
-            # Example adjustment (you can tweak the scaling):
-            T = TCgamma * (Delta / (gamma * C))**2 / (C * gamma)
+# Plot
+plt.figure(figsize=(10, 6))
+for Delta in Delta_vals:
+    eta_totals = []
+    delta_label = Delta
+    for TCgamma in TCgamma_vals:
+        # Example adjustment (you can tweak the scaling):
+        T = TCgamma * (Delta / (gamma * C))**2 / (C * gamma)
 
-            #T = TCgamma / (C * gamma) if C > 0 else TCgamma  # fallback for C=0
-            #Delta /= np.sqrt(TCgamma)
-            eta = total_efficiency(
-                T=T, C=C, Delta=Delta, gamma=gamma,
-                gamma_sw=gamma_sw, storage_time=storage_time,
-                storage_decay=storage_decay
-            )
-            eta_totals.append(eta)
+        #T = TCgamma / (C * gamma) if C > 0 else TCgamma  # fallback for C=0
+        #Delta /= np.sqrt(TCgamma)
+        eta = total_efficiency(
+            T=T, C=C, Delta=Delta, gamma=gamma,
+            gamma_sw=gamma_sw, storage_time=storage_time,
+            storage_decay=storage_decay
+        )
+        eta_totals.append(eta)
 
-        plt.plot(TCgamma_vals, eta_totals, label=f'Δ = {delta_label}')
+    plt.plot(TCgamma_vals, eta_totals, label=f'Δ = {delta_label}')
 
-    eta_max = (C / (1 + C))**2 
+eta_max = (C / (1 + C))**2 
 
-    plt.hlines(eta_max, TCgamma_vals[0], TCgamma_vals[-1], linestyles='dashed', colors='gray')
+plt.hlines(eta_max, TCgamma_vals[0], TCgamma_vals[-1], linestyles='dashed', colors='gray')
 
-    # Final plot settings
-    plt.xlabel(r'$T \cdot C \cdot \gamma$')
-    plt.ylabel(r'Total Efficiency $\eta_{\mathrm{total}}$')
-    plt.title("Adiabatic Memory Efficiency for C = 10")
-    plt.grid(True)
-    plt.legend()
-    plt.tight_layout()
-    # plt.savefig("cavity_model_efficiency_C0.png", dpi=300, bbox_inches='tight')
-    plt.show()
-
-if __name__ == "__main__":
-    main()
+# Final plot settings
+plt.xlabel(r'$T \cdot C \cdot \gamma$')
+plt.ylabel(r'Total Efficiency $\eta_{\mathrm{total}}$')
+plt.title("Adiabatic Memory Efficiency for C = 10")
+plt.grid(True)
+plt.legend()
+plt.tight_layout()
+# plt.savefig("cavity_model_efficiency_C0.png", dpi=300, bbox_inches='tight')
+plt.show()
