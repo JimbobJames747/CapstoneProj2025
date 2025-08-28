@@ -272,7 +272,7 @@ class SlotHandler:
         plt.figure(figsize=(10, 5))
         for i in range(iterations):
             print(ind_vars[2, i], ind_vars[0, i], ind_vars[1, i], ind_vars[3, i])
-            self.single_link = SingleLink(l=ind_vars[3, i], mu=1, alpha=atten, det_1_eff=ind_vars[2, i], det_2_eff=ind_vars[2, i],
+            self.single_link = SingleLink(l=ind_vars[3, i], mu=.2, alpha=atten, det_1_eff=ind_vars[2, i], det_2_eff=ind_vars[2, i],
             prob_dc_per_freq_per_bin_det_1=ind_vars[1, i], prob_dc_per_freq_per_bin_det_2=ind_vars[1, i],
             verbose=False, detector_type='guha', source_rep_rate=ind_vars[0, i], arch='midpoint')
             a_e_plus_b_e, source_rep_rate_times_a_e_plus_b_e, fid = self.single_link.run()
@@ -285,7 +285,7 @@ class SlotHandler:
         
         for i in range(iterations):
             print(ind_vars[2, i], ind_vars[0, i], ind_vars[1, i], ind_vars[3, i])
-            self.single_link = SingleLink(l=ind_vars[3, i], mu=1, alpha=atten, det_1_eff=ind_vars[2, i], det_2_eff=ind_vars[2, i],
+            self.single_link = SingleLink(l=ind_vars[3, i], mu=.2, alpha=atten, det_1_eff=ind_vars[2, i], det_2_eff=ind_vars[2, i],
             prob_dc_per_freq_per_bin_det_1=ind_vars[1, i], prob_dc_per_freq_per_bin_det_2=ind_vars[1, i],
             verbose=False, detector_type='PNR', source_rep_rate=ind_vars[0, i], arch='midpoint')
             a_e_plus_b_e, source_rep_rate_times_a_e_plus_b_e, fid = self.single_link.run()
@@ -298,7 +298,7 @@ class SlotHandler:
         
         for i in range(iterations):
             print(ind_vars[2, i], ind_vars[0, i], ind_vars[1, i], ind_vars[3, i])
-            self.single_link = SingleLink(l=ind_vars[3, i], mu=1, alpha=atten, det_1_eff=ind_vars[2, i], det_2_eff=ind_vars[2, i],
+            self.single_link = SingleLink(l=ind_vars[3, i], mu=0.2, alpha=atten, det_1_eff=ind_vars[2, i], det_2_eff=ind_vars[2, i],
             prob_dc_per_freq_per_bin_det_1=ind_vars[1, i], prob_dc_per_freq_per_bin_det_2=ind_vars[1, i],
             verbose=False, detector_type='non_PNR', source_rep_rate=ind_vars[0, i], arch='midpoint')
             a_e_plus_b_e, source_rep_rate_times_a_e_plus_b_e, fid = self.single_link.run()

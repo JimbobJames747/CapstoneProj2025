@@ -130,7 +130,7 @@ if __name__ == '__main__':
     for i in range(100):
         single_link = SingleLink(l=length[i], mu=0.1, alpha=0.2, det_1_eff=0.9, det_2_eff=0.9,
         prob_dc_per_freq_per_bin_det_1=3E-5, prob_dc_per_freq_per_bin_det_2=3E-5,
-        verbose=False, detector_type='non_PNR', source_rep_rate=51, arch='midpoint')
+        verbose=False, detector_type='non_PNR', source_rep_rate=50, arch='midpoint')
         a_e_plus_b_e, source_rep_rate_times_a_e_plus_b_e, fid = single_link.run()
         print(fid)
         fidelity.append(fid)
