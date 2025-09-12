@@ -62,7 +62,7 @@ class MainApp:
         self.window.exitBtn.clicked.connect(self.logic.exit_app)
 
         # new network button clicked
-        self.window.newBtn.clicked.connect(self.logic.new_button_clicked)
+        #self.window.newBtn.clicked.connect(self.logic.new_button_clicked)
 
         # run button clicked
         self.window.runBtn.clicked.connect(self.logic.run_button_clicked)
@@ -71,7 +71,11 @@ class MainApp:
         self.window.stopBtn.clicked.connect(self.logic.stop_button_clicked)
 
         #save button clicked
-        self.window.saveBtn.clicked.connect(lambda: self.logic.save_button_clicked("test"))
+        #self.window.saveBtn.clicked.connect(lambda: self.logic.save_button_clicked("test"))
+        self.window.saveBtn.clicked.connect(lambda: self.logic.save_button_clicked(self.logic.network))
+
+        #close button clicked
+        self.window.closeBtn.clicked.connect(self.logic.close_button_clicked)
 
         ##############################################
         ### ADDING COMPONENTS TO DRAWING AREA BTNS ###
@@ -91,17 +95,6 @@ class MainApp:
 
         ### presets ###
  
-        ####################################
-        ### SELECTING COMPONENTS IN TREE ###
-        ####################################
-
-       # self.window.
-
-
-        ########################
-        ### BTNS FOR TESTING ###
-        ########################
-
 
 
     #########################################
@@ -109,12 +102,25 @@ class MainApp:
     #########################################
 
        # add single link preset button clicked
+
         self.window.addSingleLinkBtn.clicked.connect(self.logic.add_single_link_button_clicked)
 
+    ####################################################
+    ############# single link src sender ###############
+    ####################################################
 
-        self.window.componentTree.itemClicked.connect(self.logic.show_SL_component_param)
+        self.window.addSingleLinkSenderBtn.clicked.connect(self.logic.add_single_link_button_src_at_sender_clicked)
+        
+        self.window.addRepChainBtn.clicked.connect(self.logic.add_repeater_chain_button_clicked)
 
-        self.window.paramTable.cellChanged.connect(self.logic.param_table_cell_changed)
+        self.window.componentTree.itemClicked.connect(self.logic.component_tree_item_clicked_handler)
+
+        self.window.paramTable.cellChanged.connect(self.logic.param_table_cell_changed_handler)
+
+
+    #########################################
+    ############ dialog boxes ###############
+    #########################################
 
     def show_single_link_dialog(self):
         dialog = SingleLinkDialog()
@@ -152,7 +158,7 @@ class SingleLinkDialog(QDialog):
 
         self.logic = SlotHandler(self.ui, self)
 
-        self.ui.okBtn.clicked.connect(self.logic.single_link_dialog_accepted)
+        self.ui.okBtn.clicked.connect(self.logic.single_link_dialog_handler)
         self.ui.cancelBtn.clicked.connect(self.close_single_link_dialog)
 
         self.ui.srcRepRateRBtn.pressed.connect(self.logic.SL_srcRepRateRBtn_selected)
